@@ -72,12 +72,13 @@ def get_time():
 # 获取summary类的参数
 def get_arg():
     print("请输入房间号：")
-    room_id = input()
+    room_id = '22634198'
     print("请输入日期：\n格式为202x_x_xx")
-    live_date = input()
+    live_date = '2021_9_10'
     live_road = "%s_%s" % (live_date, room_id)
     print("请输入直播类型:单人直播/双人直播/小剧场/游戏室/夜谈/活动直播")
-    live_type = input()
+    # live_type = input()
+    live_type = "单人直播"
     return room_id, live_date, live_road, live_type
 
 

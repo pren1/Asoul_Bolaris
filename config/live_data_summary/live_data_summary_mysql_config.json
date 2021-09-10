@@ -32,7 +32,7 @@
         "port":3306,
         "user":"root",
         "password":"123456",
-        "db":"live",
+        "db":"asoul_live",
         "sql_sentence":{
                         "fans_road":"%s_%s_%s_%s_rq",
                         "fans_header":"(uid, watch_time, interact_times, danmu_times, gift_times, sc_times, guard_times, pay, medal_id, medal_level)",

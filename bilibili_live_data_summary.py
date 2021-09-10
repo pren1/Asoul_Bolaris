@@ -1,5 +1,5 @@
-from live import live_data_summary
-from live import tool_function as tf
+import live_data_summary
+import tool_function as tf
 
 
 room_id, live_date, live_road, live_type = tf.get_arg()

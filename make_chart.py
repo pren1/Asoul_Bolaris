@@ -30,7 +30,7 @@ import numpy as np
 import xlrd
 import xlwt
 from xlutils.copy import copy
-import live.tool_function as tf
+import tool_function as tf
 from matplotlib.pyplot import MultipleLocator
 from scipy.interpolate import make_interp_spline
 from imageio import imread
@@ -315,7 +315,7 @@ def make_wordcloud(my_word_freq_dict, path, road):
     img = imread('%s.jpg' % path)
     image_colors = ImageColorGenerator(img)
     mask_img = np.array(img)
-    wc = wordcloud.WordCloud(font_path="C:\Windows\Fonts\msyh.ttc",
+    wc = wordcloud.WordCloud(font_path="./msyh.ttc",
                              mask=mask_img,
                              width=1000,
                              height=700,
@@ -450,46 +450,47 @@ def make_revenue_pie(pie_dict, my_pie_name, road):
         x_data.append(translate_dict[name] + ":%d元" % num)
     y_data = pie_dict.values()
     data_pair = [list(z) for z in zip(x_data, y_data)]
-    pie_name = my_pie_name
-    pie = Pie(init_opts=opts.InitOpts(bg_color='rgb(255,255,255)')).add(
-        series_name=my_pie_name,
-        # 系列数据项，格式为[(key1,value1),(key2,value2)]
-        data_pair=data_pair,
-        rosetype=None,
-        # 饼图的半径，设置成默认百分比，相对于容器高宽中较小的一项的一半
-        radius=["50%", "70%"],
-        # 饼图的圆心，第一项是相对于容器的宽度，第二项是相对于容器的高度
-        center=["50%", "50%"],
-        # 标签配置项
-        label_opts=opts.LabelOpts(is_show=False, position="center"),
-    ).set_global_opts(
-        # 设置标题
-        title_opts=opts.TitleOpts(
-            # 名字
-            title=my_pie_name,
-            # 组件距离容器左侧的位置
-            pos_left="center",
-            # 组件距离容器上方的像素值
-            pos_top="20",
-            # 设置标题颜色
-            title_textstyle_opts=opts.TextStyleOpts(color="#000000"),
-        ),
-        # 图例配置项，参数 是否显示图里组件
-        legend_opts=opts.LegendOpts(is_show=False),
-    ).set_series_opts(
-        tooltip_opts=opts.TooltipOpts(
-            trigger="item", formatter="{a} <br/>{b}: {c} ({d}%)"
-        ), label_opts=opts.LabelOpts(color="#000000"), )
-    """pie.add_js_funcs(
-
-        var img = new Image();
-        img.setAttribute('crossorigin', 'anonymous');
-        img.src = 'https://i0.hdslb.com/bfs/album/c0c440c5b9b83d29d01577ae5e0e3138fbf1b3ee.jpg';
-
-    )"""
-    color_pointer = road.split(sep='_')[3]
-    pie.set_colors(color[color_pointer])
-    make_snapshot(snapshot, pie.render(), "./output/%s/%s_%s.png" % (road, pie_name, road))
+    return data_pair
+    # pie_name = my_pie_name
+    # pie = Pie(init_opts=opts.InitOpts(bg_color='rgb(255,255,255)')).add(
+    #     series_name=my_pie_name,
+    #     # 系列数据项，格式为[(key1,value1),(key2,value2)]
+    #     data_pair=data_pair,
+    #     rosetype=None,
+    #     # 饼图的半径，设置成默认百分比，相对于容器高宽中较小的一项的一半
+    #     radius=["50%", "70%"],
+    #     # 饼图的圆心，第一项是相对于容器的宽度，第二项是相对于容器的高度
+    #     center=["50%", "50%"],
+    #     # 标签配置项
+    #     label_opts=opts.LabelOpts(is_show=False, position="center"),
+    # ).set_global_opts(
+    #     # 设置标题
+    #     title_opts=opts.TitleOpts(
+    #         # 名字
+    #         title=my_pie_name,
+    #         # 组件距离容器左侧的位置
+    #         pos_left="center",
+    #         # 组件距离容器上方的像素值
+    #         pos_top="20",
+    #         # 设置标题颜色
+    #         title_textstyle_opts=opts.TextStyleOpts(color="#000000"),
+    #     ),
+    #     # 图例配置项，参数 是否显示图里组件
+    #     legend_opts=opts.LegendOpts(is_show=False),
+    # ).set_series_opts(
+    #     tooltip_opts=opts.TooltipOpts(
+    #         trigger="item", formatter="{a} <br/>{b}: {c} ({d}%)"
+    #     ), label_opts=opts.LabelOpts(color="#000000"), )
+    # """pie.add_js_funcs(
+    #
+    #     var img = new Image();
+    #     img.setAttribute('crossorigin', 'anonymous');
+    #     img.src = 'https://i0.hdslb.com/bfs/album/c0c440c5b9b83d29d01577ae5e0e3138fbf1b3ee.jpg';
+    #
+    # )"""
+    # color_pointer = road.split(sep='_')[3]
+    # pie.set_colors(color[color_pointer])
+    # make_snapshot(snapshot, pie.render(), "./output/%s/%s_%s.png" % (road, pie_name, road))
 
 
 def make_muti_picture(my_x_data, my_y_data, table_name, road, color_dict, color_idx, live_type):
