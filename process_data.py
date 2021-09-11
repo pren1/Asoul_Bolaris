@@ -30,7 +30,7 @@ class process_data(object):
         return contents
 
     def obtain_single_vtb_room_status(self, roomid, room_id_live_list):
-        if roomid in room_id_live_list:
+        if int(roomid) in room_id_live_list:
             return 1 # 开播
         else:
             return 0 # 未开播

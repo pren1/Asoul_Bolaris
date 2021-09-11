@@ -14,7 +14,7 @@ import { PieChart } from "echarts/charts";
 import {
   TitleComponent,
   TooltipComponent,
-  LegendComponent
+  // LegendComponent
 } from "echarts/components";
 import VChart, { THEME_KEY } from "vue-echarts";
 
@@ -23,7 +23,7 @@ use([
   PieChart,
   TitleComponent,
   TooltipComponent,
-  LegendComponent
+  // LegendComponent
 ]);
 let dataIndex = -1;
 let new_dataIndex = -1; // record the new position
@@ -46,7 +46,7 @@ export default {
     timeout: null
   }),
   created() {
-    this.update_chart()
+    // this.update_chart()
     this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
   },
   watch: {
@@ -70,44 +70,22 @@ export default {
               delay_time = 2000; // if the mouse put in the pie chart, change delay here
             }
             // console.log(data.data.name)
-            return data.data.name
+            return "单次礼物价格总计：" + data.data.name
           }
         },
         series:
-        //     [
-        //   {
-        //     name: "Traffic Sources",
-        //     type: "pie",
-        //     radius: "55%",
-        //     center: ["50%", "50%"],
-        //     data: [
-        //       { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
-        //       { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
-        //       { value: Math.round(this.money_pie[2][1]), name: this.money_pie[2][0] }
-        //     ],
-        //     minShowLabelAngle: 3,
-        //     emphasis: {
-        //       itemStyle: {
-        //         shadowBlur: 10,
-        //         shadowOffsetX: 0,
-        //         shadowColor: "rgba(0, 0, 0, 0.5)"
-        //       }
-        //     }
-        //   }
-        // ]
-        [
+            [
           {
             name: "Traffic Sources",
             type: "pie",
             radius: "55%",
             center: ["50%", "50%"],
             data: [
-              { value: 335, name: "Direct" },
-              { value: 310, name: "Email" },
-              { value: 234, name: "Ad Networks" },
-              { value: 135, name: "Video Ads" },
-              { value: 1548, name: "Search Engines" }
+              { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
+              { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
+              { value: Math.round(this.money_pie[2][1]), name: this.money_pie[2][0] }
             ],
+            minShowLabelAngle: 3,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -117,6 +95,28 @@ export default {
             }
           }
         ]
+        // [
+        //   {
+        //     name: "Traffic Sources",
+        //     type: "pie",
+        //     radius: "55%",
+        //     center: ["50%", "50%"],
+        //     data: [
+        //       { value: 335, name: "Direct" },
+        //       { value: 310, name: "Email" },
+        //       { value: 234, name: "Ad Networks" },
+        //       { value: 135, name: "Video Ads" },
+        //       { value: 1548, name: "Search Engines" }
+        //     ],
+        //     emphasis: {
+        //       itemStyle: {
+        //         shadowBlur: 10,
+        //         shadowOffsetX: 0,
+        //         shadowColor: "rgba(0, 0, 0, 0.5)"
+        //       }
+        //     }
+        //   }
+        // ]
       }
     },
     highlight() {
@@ -165,7 +165,7 @@ export default {
     }
   },
   mounted () {
-    this.highlight()
+    // this.highlight()
   },
   beforeDestroy() {
     this.stopped = true;
