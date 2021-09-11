@@ -1,1 +1,1 @@
-sudo scp -r /Users/renpeng/Downloads/Bolaris /home/admin/
+sudo scp -r /Users/renpeng/Downloads/Bolaris.zip root@47.242.222.3:/home/admin/
