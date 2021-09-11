@@ -1,7 +1,7 @@
 <template>
   <div>
-    <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme"/>
-    <TypePie :input_data="input_type_pie_data" :input_theme = "custheme"/>
+    <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "单次礼物价格统计"/>
+    <MoneyPie :input_data="input_type_pie_data" :input_theme = "custheme" input_title="礼物营收总计"/>
   </div>
 </template>
 
@@ -10,14 +10,14 @@ import mixin from '../mixin.js'
 // import stat_data from '../stats.js'
 // import wordCloud_data from '../wordCloud.js'
 import MoneyPie from './money_pie.vue'
-import TypePie from './type_pie.vue'
+// import TypePie from './type_pie.vue'
 
 export default {
   name: "whole_page",
   mixins: [mixin],
   components: {
     MoneyPie,
-    TypePie
+    // TypePie
   },
   data: () => ({
     custheme: require("../roma.json"),

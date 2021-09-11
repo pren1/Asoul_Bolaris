@@ -28,7 +28,7 @@ let dataIndex = -1;
 let new_dataIndex = -1; // record the new position
 let delay_time = 1000; // specific delay
 export default {
-  props: ['input_data', 'input_theme'],
+  props: ['input_data', 'input_theme', 'input_title'],
   name: "HelloWorld",
   components: {
     VChart
@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     update_chart() {
-      this.title = "单次礼物价格统计"
+      this.title = this.input_title
       this.option = {
         tooltip: {
           trigger: "item",
@@ -62,7 +62,7 @@ export default {
               delay_time = 2000; // if the mouse put in the pie chart, change delay here
             }
             // console.log(data.data.name)
-            return "单次礼物价格总计：" + data.data.name
+            return data.data.name
           }
         },
         series:
