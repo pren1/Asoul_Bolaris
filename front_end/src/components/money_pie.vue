@@ -6,8 +6,6 @@
 </template>
 
 <script>
-// import mixin from '../mixin.js'
-// import logs from '../test.js'
 
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
@@ -31,14 +29,10 @@ let new_dataIndex = -1; // record the new position
 let delay_time = 1000; // specific delay
 export default {
   props: ['input_data', 'input_theme'],
-  // mixins: [mixin],
   name: "HelloWorld",
   components: {
     VChart
   },
-  // provide: {
-  //   [THEME_KEY]: "vintage"
-  // },
   data: () => ({
     title: 'HelloWorld',
     option: {},
@@ -46,12 +40,7 @@ export default {
     // type_pie: [],
     stopped: false,
     timeout: null,
-    // custheme: require("../roma.json"),
   }),
-  // created() {
-  //   // this.update_chart()
-  //   this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
-  // },
   watch: {
     input_data(value) {
       // console.log(logs)
@@ -98,28 +87,6 @@ export default {
             }
           }
         ]
-        // [
-        //   {
-        //     name: "Traffic Sources",
-        //     type: "pie",
-        //     radius: "55%",
-        //     center: ["50%", "50%"],
-        //     data: [
-        //       { value: 335, name: "Direct" },
-        //       { value: 310, name: "Email" },
-        //       { value: 234, name: "Ad Networks" },
-        //       { value: 135, name: "Video Ads" },
-        //       { value: 1548, name: "Search Engines" }
-        //     ],
-        //     emphasis: {
-        //       itemStyle: {
-        //         shadowBlur: 10,
-        //         shadowOffsetX: 0,
-        //         shadowColor: "rgba(0, 0, 0, 0.5)"
-        //       }
-        //     }
-        //   }
-        // ]
       }
     },
     highlight() {
