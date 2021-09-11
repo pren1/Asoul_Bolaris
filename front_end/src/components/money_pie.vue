@@ -6,7 +6,8 @@
 </template>
 
 <script>
-import mixin from '../mixin'
+import mixin from '../test.js'
+// import logs from '../test.js'
 
 import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
@@ -51,8 +52,9 @@ export default {
   },
   watch: {
     data(value) {
+      // console.log(logs)
       this.money_pie = value.money_pie
-      this.type_pie = value.type_pie
+      // this.type_pie = value.type_pie
       console.log(this.money_pie[0][0])
       console.log(this.type_pie)
       this.update_chart()
@@ -165,7 +167,7 @@ export default {
     }
   },
   mounted () {
-    // this.highlight()
+    this.highlight()
   },
   beforeDestroy() {
     this.stopped = true;

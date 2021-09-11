@@ -1,17 +1,20 @@
 <template>
   <div id="app">
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-    <HelloWorld/>
+    <MoneyPie/>
+    <TypePie/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MoneyPie from './components/money_pie.vue'
+import TypePie from './components/type_pie.vue'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MoneyPie,
+    TypePie
   }
 }
 </script>
