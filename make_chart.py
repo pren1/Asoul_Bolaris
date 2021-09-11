@@ -315,7 +315,7 @@ def make_wordcloud(my_word_freq_dict, path, road):
     img = imread('%s.jpg' % path)
     image_colors = ImageColorGenerator(img)
     mask_img = np.array(img)
-    wc = wordcloud.WordCloud(font_path="./msyh.ttc",
+    wc = wordcloud.WordCloud(font_path="/Users/renpeng/Downloads/Bolaris/msyh.ttc",
                              mask=mask_img,
                              width=1000,
                              height=700,

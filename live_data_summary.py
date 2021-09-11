@@ -22,12 +22,13 @@ class live_summary(object):
     """
     针对单场直播获取直播数据可视化，并将数据转储到mysql数据库中
     """
-    def __init__(self, my_room_id, my_live_date, my_live_road, my_live_type):
+    def __init__(self, my_room_id, my_live_date, my_live_road, target_path):
 
         self.live_date = my_live_date
         self.room_id = my_room_id
         self.live_road = my_live_road
-        self.live_type = my_live_type
+        # self.live_type = my_live_type
+        self.target_path = target_path
 
         self.config = tf.get_config("./config/live_data_summary/live_data_summary_mysql_config.json")
 
@@ -392,7 +393,7 @@ class live_summary(object):
         res_dict['new_medal_fans_data'] = new_medal_fans_data
         res_dict['simu_interact'] = new_stats_list['simu_interact']
 
-        with open(f"{self.dm_sql_road}_stats_picture.json", "w", encoding='utf8') as outfile:
+        with open(f"{self.target_path}/{self.dm_sql_road}_stats_picture.json", "w", encoding='utf8') as outfile:
             json.dump(res_dict, outfile, ensure_ascii=False)
 
     # 生成营收饼图，收入分布，营收数据存入每日统计数据库
@@ -410,7 +411,7 @@ class live_summary(object):
         res_dict['money_pie'] = money_pie
         res_dict['type_pie'] = type_pie
 
-        with open(f"{self.dm_sql_road}_pie_picture.json", "w", encoding='utf8') as outfile:
+        with open(f"{self.target_path}/{self.dm_sql_road}_pie_picture.json", "w", encoding='utf8') as outfile:
             json.dump(res_dict, outfile, ensure_ascii=False)
 
         return

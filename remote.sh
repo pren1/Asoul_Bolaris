@@ -1,0 +1,1 @@
+sudo scp -r /Users/renpeng/Downloads/Bolaris /home/admin/
