@@ -168,7 +168,7 @@ export default {
     }
   },
   mounted () {
-    this.highlight()
+    // this.highlight()
   },
   beforeDestroy() {
     this.stopped = true;
