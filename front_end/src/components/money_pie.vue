@@ -30,6 +30,7 @@ let dataIndex = -1;
 let new_dataIndex = -1; // record the new position
 let delay_time = 1000; // specific delay
 export default {
+  props: ['username'],
   mixins: [mixin],
   name: "HelloWorld",
   components: {
@@ -59,6 +60,9 @@ export default {
       console.log(this.type_pie)
       this.update_chart()
     },
+    username(value) {
+      console.log('triggered input value! ' + value)
+    }
   },
   methods: {
     update_chart() {

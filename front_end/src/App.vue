@@ -1,20 +1,19 @@
 <template>
   <div id="app">
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-    <MoneyPie/>
-    <TypePie/>
+    <whole_page/>
   </div>
 </template>
 
 <script>
-import MoneyPie from './components/money_pie.vue'
-import TypePie from './components/type_pie.vue'
+// import MoneyPie from './components/money_pie.vue'
+// import TypePie from './components/type_pie.vue'
+import whole_page from "@/components/whole_page";
 
 export default {
   name: 'App',
   components: {
-    MoneyPie,
-    TypePie
+    whole_page
   }
 }
 </script>
