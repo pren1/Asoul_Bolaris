@@ -1,12 +1,12 @@
 <template>
   <div class="card">
     <h2 class="title">{{ title }}</h2>
-    <v-chart ref="pie" class="chart" :option="option" autoresize theme="light"/>
+    <v-chart ref="pie" class="chart" :option="option" autoresize :theme="input_theme"/>
   </div>
 </template>
 
 <script>
-import mixin from '../mixin.js'
+// import mixin from '../mixin.js'
 // import logs from '../test.js'
 
 import { use } from "echarts/core";
@@ -17,7 +17,7 @@ import {
   TooltipComponent,
   // LegendComponent
 } from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
+import VChart from "vue-echarts";
 
 use([
   CanvasRenderer,
@@ -30,35 +30,36 @@ let dataIndex = -1;
 let new_dataIndex = -1; // record the new position
 let delay_time = 1000; // specific delay
 export default {
-  mixins: [mixin],
+  props: ['input_data', 'input_theme'],
+  // mixins: [mixin],
   name: "Type_pie",
   components: {
     VChart
   },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
+  // provide: {
+  //   [THEME_KEY]: "vintage"
+  // },
   data: () => ({
     title: 'Type_pie',
     option: {},
-    money_pie: [],
+    // money_pie: [],
     type_pie: [],
     stopped: false,
-    timeout: null
+    timeout: null,
+    // custheme: require("../roma.json"),
   }),
-  created() {
-    // this.update_chart()
-    this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
-  },
+  // created() {
+  //   // this.update_chart()
+  //   this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
+  // },
   watch: {
-    data(value) {
+    input_data(value) {
       // console.log(logs)
-      // this.money_pie = value.money_pie
-      this.type_pie = value.type_pie
-      // console.log(this.money_pie[0][0])
-      console.log(this.type_pie)
+      this.type_pie = value
+      console.log(this.type_pie[0][0])
+      // console.log(this.type_pie)
       this.update_chart()
-    },
+    }
   },
   methods: {
     update_chart() {
@@ -72,7 +73,7 @@ export default {
               delay_time = 2000; // if the mouse put in the pie chart, change delay here
             }
             // console.log(data.data.name)
-            return "礼物营收统计：" + data.data.name
+            return data.data.name
           }
         },
         series:
@@ -167,49 +168,12 @@ export default {
     }
   },
   mounted () {
-     this.highlight()
+    this.highlight()
   },
   beforeDestroy() {
     this.stopped = true;
     clearTimeout(this.timeout)
   },
-
-  // data() {
-  //   return {
-  //     option: {
-  //       // title: {
-  //       //   text: "Traffic Sources",
-  //       //   left: "center"
-  //       // },
-  //       tooltip: {
-  //         trigger: "item",
-  //         formatter: "{a} <br/>{b} : {c} ({d}%)"
-  //       },
-  //       series: [
-  //         {
-  //           name: "Traffic Sources",
-  //           type: "pie",
-  //           radius: "55%",
-  //           center: ["50%", "50%"],
-  //           data: [
-  //             { value: 335, name: "Direct" },
-  //             { value: 310, name: "Email" },
-  //             { value: 234, name: "Ad Networks" },
-  //             { value: 135, name: "Video Ads" },
-  //             { value: 1548, name: "Search Engines" }
-  //           ],
-  //           emphasis: {
-  //             itemStyle: {
-  //               shadowBlur: 10,
-  //               shadowOffsetX: 0,
-  //               shadowColor: "rgba(0, 0, 0, 0.5)"
-  //             }
-  //           }
-  //         }
-  //       ]
-  //     }
-  //   };
-  // }
 };
 </script>
 

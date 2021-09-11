@@ -1,12 +1,12 @@
 <template>
   <div class="card">
     <h2 class="title">{{ title }}</h2>
-    <v-chart ref="pie" class="chart" :option="option" autoresize :theme="custheme"/>
+    <v-chart ref="pie" class="chart" :option="option" autoresize :theme="input_theme"/>
   </div>
 </template>
 
 <script>
-import mixin from '../mixin.js'
+// import mixin from '../mixin.js'
 // import logs from '../test.js'
 
 import { use } from "echarts/core";
@@ -30,8 +30,8 @@ let dataIndex = -1;
 let new_dataIndex = -1; // record the new position
 let delay_time = 1000; // specific delay
 export default {
-  props: ['username'],
-  mixins: [mixin],
+  props: ['input_data', 'input_theme'],
+  // mixins: [mixin],
   name: "HelloWorld",
   components: {
     VChart
@@ -43,26 +43,22 @@ export default {
     title: 'HelloWorld',
     option: {},
     money_pie: [],
-    type_pie: [],
+    // type_pie: [],
     stopped: false,
     timeout: null,
-    custheme: require("../roma.json"),
+    // custheme: require("../roma.json"),
   }),
-  created() {
-    this.update_chart()
-    this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
-  },
+  // created() {
+  //   // this.update_chart()
+  //   this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
+  // },
   watch: {
-    data(value) {
+    input_data(value) {
       // console.log(logs)
-      this.money_pie = value.money_pie
-      // this.type_pie = value.type_pie
+      this.money_pie = value
       console.log(this.money_pie[0][0])
-      console.log(this.type_pie)
+      // console.log(this.type_pie)
       this.update_chart()
-    },
-    username(value) {
-      console.log('triggered input value! ' + value)
     }
   },
   methods: {
@@ -81,40 +77,18 @@ export default {
           }
         },
         series:
-        //     [
-        //   {
-        //     name: "Traffic Sources",
-        //     type: "pie",
-        //     radius: "55%",
-        //     center: ["50%", "50%"],
-        //     data: [
-        //       { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
-        //       { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
-        //       { value: Math.round(this.money_pie[2][1]), name: this.money_pie[2][0] }
-        //     ],
-        //     minShowLabelAngle: 3,
-        //     emphasis: {
-        //       itemStyle: {
-        //         shadowBlur: 10,
-        //         shadowOffsetX: 0,
-        //         shadowColor: "rgba(0, 0, 0, 0.5)"
-        //       }
-        //     }
-        //   }
-        // ]
-        [
+            [
           {
             name: "Traffic Sources",
             type: "pie",
             radius: "55%",
             center: ["50%", "50%"],
             data: [
-              { value: 335, name: "Direct" },
-              { value: 310, name: "Email" },
-              { value: 234, name: "Ad Networks" },
-              { value: 135, name: "Video Ads" },
-              { value: 1548, name: "Search Engines" }
+              { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
+              { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
+              { value: Math.round(this.money_pie[2][1]), name: this.money_pie[2][0] }
             ],
+            minShowLabelAngle: 3,
             emphasis: {
               itemStyle: {
                 shadowBlur: 10,
@@ -124,6 +98,28 @@ export default {
             }
           }
         ]
+        // [
+        //   {
+        //     name: "Traffic Sources",
+        //     type: "pie",
+        //     radius: "55%",
+        //     center: ["50%", "50%"],
+        //     data: [
+        //       { value: 335, name: "Direct" },
+        //       { value: 310, name: "Email" },
+        //       { value: 234, name: "Ad Networks" },
+        //       { value: 135, name: "Video Ads" },
+        //       { value: 1548, name: "Search Engines" }
+        //     ],
+        //     emphasis: {
+        //       itemStyle: {
+        //         shadowBlur: 10,
+        //         shadowOffsetX: 0,
+        //         shadowColor: "rgba(0, 0, 0, 0.5)"
+        //       }
+        //     }
+        //   }
+        // ]
       }
     },
     highlight() {
@@ -178,43 +174,6 @@ export default {
     this.stopped = true;
     clearTimeout(this.timeout)
   },
-
-  // data() {
-  //   return {
-  //     option: {
-  //       // title: {
-  //       //   text: "Traffic Sources",
-  //       //   left: "center"
-  //       // },
-  //       tooltip: {
-  //         trigger: "item",
-  //         formatter: "{a} <br/>{b} : {c} ({d}%)"
-  //       },
-  //       series: [
-  //         {
-  //           name: "Traffic Sources",
-  //           type: "pie",
-  //           radius: "55%",
-  //           center: ["50%", "50%"],
-  //           data: [
-  //             { value: 335, name: "Direct" },
-  //             { value: 310, name: "Email" },
-  //             { value: 234, name: "Ad Networks" },
-  //             { value: 135, name: "Video Ads" },
-  //             { value: 1548, name: "Search Engines" }
-  //           ],
-  //           emphasis: {
-  //             itemStyle: {
-  //               shadowBlur: 10,
-  //               shadowOffsetX: 0,
-  //               shadowColor: "rgba(0, 0, 0, 0.5)"
-  //             }
-  //           }
-  //         }
-  //       ]
-  //     }
-  //   };
-  // }
 };
 </script>
 
