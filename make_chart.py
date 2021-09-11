@@ -200,7 +200,8 @@ def make_min_picture(my_data, timescale, table_name, road, if_sum, color):
     model = make_interp_spline(x, y)
     xs = np.linspace(np.min(x, axis=0), np.max(x, axis=0), 500)
     ys = model(xs)
-
+    import pdb
+    pdb.set_trace()
     plt.fill_between(xs, 0, ys, facecolor=color, alpha=0.4)
     plt.plot(xs, ys, c=color)
     plt.grid(True)

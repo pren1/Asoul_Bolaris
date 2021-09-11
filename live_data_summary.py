@@ -362,7 +362,7 @@ class live_summary(object):
                 new_stats_list[my_type].append(num)
         res_dict = {}
         # 礼物图   1mins
-        # mc.make_min_picture(new_stats_list['gift'], 1, '送礼人次', self.live_road, 1, self.line_color[self.room_id])
+        mc.make_min_picture(new_stats_list['gift'], 1, '送礼人次', self.live_road, 1, self.line_color[self.room_id])
         # 弹幕图   1mins
         # mc.make_min_picture(new_stats_list['danmu'], 1, '弹幕数量', self.live_road, 1, self.line_color[self.room_id])
         # sc图    3mins
