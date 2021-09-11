@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <h2 class="title">{{ title }}</h2>
-    <v-chart ref="pie" class="chart" :option="option" autoresize theme="light"/>
+    <v-chart ref="pie" class="chart" :option="option" autoresize :theme="custheme"/>
   </div>
 </template>
 
@@ -17,7 +17,7 @@ import {
   TooltipComponent,
   // LegendComponent
 } from "echarts/components";
-import VChart, { THEME_KEY } from "vue-echarts";
+import VChart from "vue-echarts";
 
 use([
   CanvasRenderer,
@@ -36,19 +36,20 @@ export default {
   components: {
     VChart
   },
-  provide: {
-    [THEME_KEY]: "dark"
-  },
+  // provide: {
+  //   [THEME_KEY]: "vintage"
+  // },
   data: () => ({
     title: 'HelloWorld',
     option: {},
     money_pie: [],
     type_pie: [],
     stopped: false,
-    timeout: null
+    timeout: null,
+    custheme: require("../roma.json"),
   }),
   created() {
-    // this.update_chart()
+    this.update_chart()
     this.url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
   },
   watch: {
@@ -80,40 +81,18 @@ export default {
           }
         },
         series:
-            [
-          {
-            name: "Traffic Sources",
-            type: "pie",
-            radius: "55%",
-            center: ["50%", "50%"],
-            data: [
-              { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
-              { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
-              { value: Math.round(this.money_pie[2][1]), name: this.money_pie[2][0] }
-            ],
-            minShowLabelAngle: 3,
-            emphasis: {
-              itemStyle: {
-                shadowBlur: 10,
-                shadowOffsetX: 0,
-                shadowColor: "rgba(0, 0, 0, 0.5)"
-              }
-            }
-          }
-        ]
-        // [
+        //     [
         //   {
         //     name: "Traffic Sources",
         //     type: "pie",
         //     radius: "55%",
         //     center: ["50%", "50%"],
         //     data: [
-        //       { value: 335, name: "Direct" },
-        //       { value: 310, name: "Email" },
-        //       { value: 234, name: "Ad Networks" },
-        //       { value: 135, name: "Video Ads" },
-        //       { value: 1548, name: "Search Engines" }
+        //       { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
+        //       { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
+        //       { value: Math.round(this.money_pie[2][1]), name: this.money_pie[2][0] }
         //     ],
+        //     minShowLabelAngle: 3,
         //     emphasis: {
         //       itemStyle: {
         //         shadowBlur: 10,
@@ -123,6 +102,28 @@ export default {
         //     }
         //   }
         // ]
+        [
+          {
+            name: "Traffic Sources",
+            type: "pie",
+            radius: "55%",
+            center: ["50%", "50%"],
+            data: [
+              { value: 335, name: "Direct" },
+              { value: 310, name: "Email" },
+              { value: 234, name: "Ad Networks" },
+              { value: 135, name: "Video Ads" },
+              { value: 1548, name: "Search Engines" }
+            ],
+            emphasis: {
+              itemStyle: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: "rgba(0, 0, 0, 0.5)"
+              }
+            }
+          }
+        ]
       }
     },
     highlight() {
