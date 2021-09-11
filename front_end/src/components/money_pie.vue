@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import mixin from '../test.js'
+import mixin from '../mixin.js'
 // import logs from '../test.js'
 
 import { use } from "echarts/core";
