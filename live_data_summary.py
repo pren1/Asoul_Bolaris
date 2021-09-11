@@ -17,6 +17,8 @@ import make_chart as mc
 import pymysql
 import pdb
 import json
+import warnings
+warnings.filterwarnings("ignore")
 
 class live_summary(object):
     """
@@ -360,28 +362,28 @@ class live_summary(object):
                 new_stats_list[my_type].append(num)
         res_dict = {}
         # 礼物图   1mins
-        mc.make_min_picture(new_stats_list['gift'], 1, '送礼人次', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_stats_list['gift'], 1, '送礼人次', self.live_road, 1, self.line_color[self.room_id])
         # 弹幕图   1mins
-        mc.make_min_picture(new_stats_list['danmu'], 1, '弹幕数量', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_stats_list['danmu'], 1, '弹幕数量', self.live_road, 1, self.line_color[self.room_id])
         # sc图    3mins
         sc_data = mc.trans_mins_sum(1, 3, new_stats_list['sc'])
-        mc.make_min_picture(sc_data, 3, 'sc数量', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(sc_data, 3, 'sc数量', self.live_road, 1, self.line_color[self.room_id])
         # guard图 3mins
         guard_data = mc.trans_mins_sum(1, 3, new_stats_list['guard'])
-        mc.make_min_picture(guard_data, 3, '舰团数量', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(guard_data, 3, '舰团数量', self.live_road, 1, self.line_color[self.room_id])
         # entry图 1mins
-        mc.make_min_picture(new_stats_list['entry'], 1, '入场人次', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_stats_list['entry'], 1, '入场人次', self.live_road, 1, self.line_color[self.room_id])
         # 营收图   1mins
-        mc.make_min_picture(new_stats_list['revenue'], 1, '营收', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_stats_list['revenue'], 1, '营收', self.live_road, 1, self.line_color[self.room_id])
         # fans图  3mins
         new_fans_data = mc.trans_mins_sum(1, 3, new_stats_list['new_fans'])
-        mc.make_min_picture(new_fans_data, 3, '新增粉丝', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_fans_data, 3, '新增粉丝', self.live_road, 1, self.line_color[self.room_id])
         # 粉丝团图 3mins
         new_medal_fans_data = mc.trans_mins_sum(1, 3, new_stats_list['new_medal_fans'])
-        mc.make_min_picture(new_medal_fans_data, 3, '新增粉丝团', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_medal_fans_data, 3, '新增粉丝团', self.live_road, 1, self.line_color[self.room_id])
         # 同接图   1mins
-        mc.make_min_picture(new_stats_list['simu_interact'], 1,
-                            '10分钟同接', self.live_road, 0, self.line_color[self.room_id])
+        # mc.make_min_picture(new_stats_list['simu_interact'], 1,
+        #                     '10分钟同接', self.live_road, 0, self.line_color[self.room_id])
 
         res_dict['gift'] = new_stats_list['gift']
         res_dict['danmu'] = new_stats_list['danmu']
@@ -522,13 +524,21 @@ class live_summary(object):
         word_freq_dic, min_hot_word = mw.get_word_freq_dic(my_live_data_group_by_type)
         # TODO(ydyjya): 分钟热词待做
         word_freq_bar_num = 15
+
+        res_dict = {}
         word_freq_bar_dict = mw.customize_word_freq_dict(word_freq_dic, word_freq_bar_num)
         # mc.pc_make_word_freq_bar(word_freq_bar_dict, self.live_road)
         # 上面是自定义symbol格式的bar，但似乎效果不算很好
-        mc.make_word_freq_bar(word_freq_bar_dict, self.live_road, self.line_color[self.room_id])
+        # mc.make_word_freq_bar(word_freq_bar_dict, self.live_road, self.line_color[self.room_id])
         word_cloud_num = 600
         word_cloud_dict = mw.customize_word_freq_dict(word_freq_dic, word_cloud_num)
-        mc.make_wordcloud(word_cloud_dict, ('./image/wordcloud/%s' % self.room_id), self.live_road)
+
+        res_dict['word_freq_bar_dict'] = word_freq_bar_dict
+        res_dict['word_cloud_dict'] = word_cloud_dict
+
+        with open(f"{self.target_path}/{self.dm_sql_road}_word_cloud.json", "w", encoding='utf8') as outfile:
+            json.dump(res_dict, outfile, ensure_ascii=False)
+        # mc.make_wordcloud(word_cloud_dict, ('./image/wordcloud/%s' % self.room_id), self.live_road)
 
 
 
