@@ -40,10 +40,15 @@ export default {
   }),
   watch: {
     input_data(value) {
-      // console.log(value)
-      for (const [key, dict_val] of Object.entries(value)) {
-        this.x_data.push(key)
-        this.y_data.push(dict_val)
+      console.log(this.sort_dict(value))
+      let sorted_value = this.sort_dict(value)
+      // for (const [key, dict_val] of Object.entries(this.sort_dict(value))) {
+      //   this.x_data.push(key)
+      //   this.y_data.push(dict_val)
+      // }
+      for (let i = 0; i < sorted_value.length; i++) {
+        this.x_data.push(sorted_value[i][0])
+        this.y_data.push(sorted_value[i][1])
       }
       this.update_chart()
     }
@@ -52,10 +57,22 @@ export default {
   //   this.update_chart()
   // },
   methods: {
+    sort_dict(dict){
+      // Create items array
+      var items = Object.keys(dict).map(function(key) {
+        return [key, dict[key]];
+      });
+
+      // Sort the array based on the second element
+      items.sort(function(first, second) {
+        return second[1] - first[1];
+      });
+      return items
+    },
     update_chart() {
       this.title = this.input_title
-      console.log("xdata: " + this.x_data)
-      console.log("ydata: " + this.y_data)
+      // console.log("xdata: " + this.x_data)
+      // console.log("ydata: " + this.y_data)
       this.option = {
           toolbox: {
               show: true,
@@ -65,7 +82,7 @@ export default {
                   dataZoom: {
                       yAxisIndex: 'none'
                   },
-                  dataView: {readOnly: false},
+                  magicType: {type: ['line', 'bar']},
                   saveAsImage: {}
               }
           },
@@ -78,6 +95,10 @@ export default {
             // splitLine:{
             //   show:false
             // },
+            axisLabel: {
+              interval: 0,
+              rotate: 30 //If the label names are too long you can manage this by rotating the label.
+            },
             data: this.x_data,
             name: this.input_x_label,
             nameLocation: 'middle',
@@ -91,6 +112,12 @@ export default {
               name: this.input_y_label,
               nameLocation: 'middle',
               nameGap: 40
+          },
+          tooltip: {
+              trigger: 'axis',
+              axisPointer: {            // 坐标轴指示器，坐标轴触发有效
+                  type: 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+              }
           },
          // tooltip: {
          //    trigger: 'axis',
