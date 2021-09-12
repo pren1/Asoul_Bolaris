@@ -1,22 +1,23 @@
 <template>
   <div id="app">
 <!--    <img alt="Vue logo" src="./assets/logo.png">-->
-    <whole_page/>
+<!--    <whole_page/>-->
+    <router-view/>
   </div>
 </template>
 
-<script>
-// import MoneyPie from './components/money_pie.vue'
-// import TypePie from './components/type_pie.vue'
-import whole_page from "@/components/whole_page";
+<!--<script>-->
+<!--// import MoneyPie from './components/money_pie.vue'-->
+<!--// import TypePie from './components/type_pie.vue'-->
+<!--// import whole_page from "@/components/whole_page";-->
 
-export default {
-  name: 'App',
-  components: {
-    whole_page
-  }
-}
-</script>
+<!--export default {-->
+<!--  name: 'App',-->
+<!--  components: {-->
+<!--    whole_page-->
+<!--  }-->
+<!--}-->
+<!--</script>-->
 
 <style>
 #app {

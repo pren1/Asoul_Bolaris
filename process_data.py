@@ -44,7 +44,7 @@ class process_data(object):
                 room_id = vtb_info.room_id
                 live_date = self.current_date()
                 print(f"{name} 下播啦, 正在处理{room_id}数据, 时间：{live_date}")
-                process_live_data(room_id, live_date)
+                process_live_data(room_id, live_date, target_path = "/home/admin/public/data/")
 
             'Update the room status'
             self.asoul_uid_dict[name] = self.asoul_uid_dict[name]._replace(is_live=current_room_status)

@@ -7,6 +7,7 @@ import ECharts from 'vue-echarts'
 import './index.scss'
 import axios from 'axios'
 // import * as echarts from 'echarts'
+import router from './router'
 
 // require('echarts-wordcloud')
 // Vue.prototype.$echarts = echarts;
@@ -16,5 +17,6 @@ Vue.prototype.$axios = axios
 // axios.defaults.headers.get['Access-Control-Allow-Origin'] = '*'
 
 new Vue({
+  router,
   render: h => h(App),
 }).$mount('#app')

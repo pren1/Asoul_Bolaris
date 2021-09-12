@@ -1,11 +1,11 @@
 <template>
-  <div class="container">
+  <div class="container background_img" id="myPElement">
     <BarChart :input_data="input_wordCloud_bar_data" :input_theme="custheme"
                input_title="词频统计" input_x_label="词语" input_y_label="词语数目"
                 />
     <div class="card">
       <h2 class="title">词云</h2>
-      <img width="50%" src="https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_word_cloud.png" alt="Image">
+      <img width="50%" :src="image_url" alt="Image">
     </div>
     <div class="container_2">
       <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "按金额分"/>
@@ -21,6 +21,8 @@
       <LineChart :input_data="input_gift_line_data" :input_theme="custheme"
                  input_title="送礼人次" input_x_label="开播时长/1mins——时间区段：1mins  "
                  input_y_label="送礼人次" calculate_total="计算总和" time_scale="1"/>
+    </div>
+    <div class="container_2">
       <LineChart :input_data="input_guard_data_line_data" :input_theme="custheme"
                  input_title="舰团数量" input_x_label="开播时长/1mins——时间区段：3mins  "
                  input_y_label="舰团数量" calculate_total="计算总和" time_scale="3"/>
@@ -30,6 +32,8 @@
       <LineChart :input_data="input_new_medal_fans_data_line_data" :input_theme="custheme"
                  input_title="新增粉丝团" input_x_label="开播时长/1mins——时间区段：3mins  "
                  input_y_label="新增粉丝团" calculate_total="计算总和" time_scale="3"/>
+    </div>
+    <div class="container_2">
       <LineChart :input_data="input_revenue_data_line_data" :input_theme="custheme"
                  input_title="营收" input_x_label="开播时长/1mins——时间区段：1mins  "
                  input_y_label="营收" calculate_total="计算总和" time_scale="1"/>
@@ -83,9 +87,18 @@ export default {
     input_wordCloud_image_data: []
   }),
   created() {
-    this.pie_url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
-    this.stats_url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_stats_picture.json`
-    this.wordCloud_url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_word_cloud.json`
+    console.log("live info" + this.$route.params.live_info)
+    let info = this.$route.params.live_info.split("&")
+    let target_link = info[0] + '_' + info[1]
+
+    this.pie_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_pie_picture.json`
+    this.stats_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_stats_picture.json`
+    this.wordCloud_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_word_cloud.json`
+    this.image_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_word_cloud.png`
+
+    let test = "https://asoulmonitor.xyz/api/data/" + target_link + "_dm_word_cloud.png"
+    console.log(test)
+    let user_id = info[1]
 
     let color_selector = {
     "22625025": "#9AC8E2",
@@ -95,8 +108,18 @@ export default {
     "22625027": "#576690",
     "other":  "#000000"
     }
-
-    document.querySelector('body').style.setProperty('--main-color', color_selector["22634198"]);
+    // document.querySelector('body').style.setProperty('example', test);
+    document.querySelector('body').style.setProperty('--main-color', color_selector[user_id]);
+  },
+  mounted() {
+    window.addEventListener('load', () => {
+        // run after everything is in-place
+        console.log("width" + screen.width)
+        if (screen.width > 700){
+          document.getElementById('myPElement').style.maxWidth = screen.width + 'px';
+        }
+        document.getElementById('myPElement').style.backgroundImage = 'url(' + this.image_url + ')';
+    })
   },
   watch: {
     my_pie_data(value) {
@@ -125,6 +148,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+//$background_image_url: var(example);
 $background_color: var(--main-color);
 .container {
    /*width: 100%;*/
@@ -135,12 +159,25 @@ $background_color: var(--main-color);
    justify-content: center;
    align-items: center;
    gap: 3.5rem;
-   /*background-color: black;*/
-   background-image: url("https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_word_cloud.png");
-   background-repeat: no-repeat;
-   background-position: center center; /* Center the image */
-   background-size: 270%;
+}
+.background_img{
+  /*background-color: black;*/
+   //background-image: url("https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_word_cloud.png");
+   //background-repeat: no-repeat;
+   //background-position: center center; /* Center the image */
+   //background-size: 270%;
    background-color: $background_color;
+   //background-attachment: scroll;
+   position: relative;
+   height: 1000%;
+   width: 270%;
+   //max-height: 300%;
+   //max-width: 1792px;
+   background-position: center 30%;
+   background-repeat: no-repeat;
+   background-size: 270%, cover;
+   background-attachment: local, fixed;
+  //overflow: hidden;
 }
 
 .container_2{

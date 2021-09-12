@@ -48,6 +48,7 @@ class live_summary(object):
             self.mysql_conn = pymysql.connect(host=self.host, port=self.port,
                                               user=self.user, password=self.password, db=self.db)
 
+
         except Exception as e:
             print("connect failed")
             raise e
@@ -58,6 +59,26 @@ class live_summary(object):
         self.everyday_stats_sql_road = self.live_road + "_stats"
 
         self.line_color = self.config['line_color']
+
+    def extract_live_info(self):
+        # Create a Cursor object
+        cur = self.mysql_conn.cursor()
+
+        # Execute the query: To get the name of the tables from a specific database
+        # replace only the my_database with the name of your database
+        cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'asoul_live'")
+
+        result = set()
+        # Read and print tables
+        for table in [tables[0] for tables in cur.fetchall()]:
+            # print(table)
+            if table[-2:] == 'rq':
+                list_res = table.split('_')
+                result.add(list_res[0] + '_' + list_res[1] + '_' + list_res[2] + '&' + list_res[3])
+        # print(result)
+        with open(f"{self.target_path}/live_list.json", "w", encoding='utf8') as outfile:
+            json.dump(list(result), outfile, ensure_ascii=False)
+        # pdb.set_trace()
 
     def get_everyday_live_stats(self):
         """
@@ -127,6 +148,7 @@ class live_summary(object):
         # # 4.生成直播饼图
         self.__make_revenue_picture(user_stats)
 
+        self.extract_live_info()
         # 5.存储fans数据到mysql
         # self.__fans_stats2sql(user_data, live_data_group_by_id)
 
