@@ -62,7 +62,7 @@ export default {
     update_chart() {
       this.title = this.input_title
       if (this.calculate_total === "计算总和") {
-        this.title += "合计：" + this.data_array_1d.reduce((x, y) => x + y)
+        this.title += "合计：" + Math.round(this.data_array_1d.reduce((x, y) => x + y))
       }
       this.option = {
           toolbox: {
@@ -135,6 +135,6 @@ export default {
 <style scoped>
 .chart {
   height: 400px;
-  padding-left: 3rem;
+  padding-left: 1rem;
 }
 </style>
