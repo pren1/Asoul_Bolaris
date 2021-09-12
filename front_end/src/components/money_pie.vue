@@ -31,12 +31,12 @@ let new_dataIndex = -1; // record the new position
 let delay_time = 1000; // specific delay
 export default {
   props: ['input_data', 'input_theme', 'input_title'],
-  name: "HelloWorld",
+  name: "pie_chart",
   components: {
     VChart
   },
   data: () => ({
-    title: 'HelloWorld',
+    title: '加载中...',
     option: {},
     money_pie: [],
     // type_pie: [],

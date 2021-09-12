@@ -33,7 +33,7 @@ export default {
     VChart
   },
   data: () => ({
-    title: 'HelloWorld',
+    title: '加载中...',
     option: {},
     x_data: [],
     y_data: []

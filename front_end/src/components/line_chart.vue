@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <div class="card2">
     <h2 class="title">{{ title }}</h2>
     <v-chart class="chart" :option="option" autoresize :theme="input_theme"/>
   </div>
@@ -33,7 +33,7 @@ export default {
     VChart
   },
   data: () => ({
-    title: 'HelloWorld',
+    title: '加载中...',
     option: {},
     line_data: [],
     data_array_1d: []
