@@ -316,8 +316,8 @@ def make_wordcloud(my_word_freq_dict, path, road, save_path):
     mask_img = np.array(img)
     wc = wordcloud.WordCloud(font_path="/home/admin/Bolaris/MSYH.TTC",
                              mask=mask_img,
-                             width=1000,
-                             height=700,
+                             width=500,
+                             height=350,
                              background_color=None,
                              mode="RGBA",
                              max_words=250)

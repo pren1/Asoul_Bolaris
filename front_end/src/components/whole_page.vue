@@ -1,5 +1,9 @@
 <template>
-  <div>
+  <div class="container">
+    <div class="card">
+      <h2 class="title">词云</h2>
+      <img width="50%" src="https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_word_cloud.png" alt="Image">
+    </div>
 <!--    <Test :input_data="input_wordCloud_image_data">233</Test>-->
     <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "按金额分"/>
     <MoneyPie :input_data="input_type_pie_data" :input_theme = "custheme" input_title="按类型分"/>
@@ -45,6 +49,12 @@ import BarChart from './word_cloud_hist.vue'
 
 export default {
   name: "whole_page",
+  beforeCreate () {
+    document.querySelector('body').setAttribute('style', 'background:#a092f1')
+  },
+  beforeDestroy () {
+    document.querySelector('body').setAttribute('style', '')
+  },
   mixins: [mixin],
   components: {
     MoneyPie,
@@ -100,5 +110,13 @@ export default {
 </script>
 
 <style scoped>
-
+.container {
+   /*width: 100%;*/
+   display: flex;
+   flex-direction: column;
+   flex-wrap: wrap;
+   justify-content: center;
+   align-items: center;
+   gap: 4rem;
+}
 </style>

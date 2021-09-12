@@ -56,6 +56,7 @@ export default {
     update_chart() {
       this.title = this.input_title
       this.option = {
+        backgroundColor: 'white',
         toolbox: {
               show: true,
               right: '10%',

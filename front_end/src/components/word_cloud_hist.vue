@@ -74,6 +74,7 @@ export default {
       // console.log("xdata: " + this.x_data)
       // console.log("ydata: " + this.y_data)
       this.option = {
+          backgroundColor: 'white',
           toolbox: {
               show: true,
               right: '10%',

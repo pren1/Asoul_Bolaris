@@ -65,6 +65,7 @@ export default {
         this.title += "合计：" + Math.round(this.data_array_1d.reduce((x, y) => x + y))
       }
       this.option = {
+          backgroundColor: 'white',
           toolbox: {
               show: true,
               right: '10%',
@@ -127,7 +128,7 @@ export default {
              },
               name: this.input_y_label,
               nameLocation: 'middle',
-              nameGap: 40
+              nameGap: 50
           },
          tooltip: {
             trigger: 'axis',
