@@ -10,7 +10,8 @@ body {
   border-radius: 6px;
   overflow: hidden;
   transition: 0.3s ease;
-  padding: -2rem auto;
+  //padding: -2rem auto;
+  //padding-left: -500px;
 
   &:hover {
     box-shadow: 1px 1px 12px 0 #0000001F;
@@ -48,46 +49,6 @@ body {
     p {
       margin: 0.2rem 0;
     }
-  }
-
-  .icon_val {
-    right: 18px;
-    top: 18px;
-    position: absolute;
-
-    .inner {
-        margin: 2px; // Or whatever you want your spacing to be
-    }
-  }
-}
-
-.padding_part {
-  padding-top: 1rem;
- }
-
-.padding_for_server_info {
-  padding-top: 1rem;
-  padding-bottom: 1rem;
- }
-
-.monitor_card {
-  display: inline-block;
-  max-width: 1000px;
-  border: 1px solid #ebeef5;
-  border-radius: 6px;
-  overflow: hidden;
-  transition: 0.3s ease;
-  margin: 2rem 2rem;
-
-  &:hover {
-    box-shadow: 1px 1px 12px 0 #0000001F;
-  }
-
-  h2 {
-    padding: 1rem 1.25rem;
-    margin: 0;
-    border-bottom: 1px solid #ebeef5;
-    box-sizing: border-box;
   }
 
   .icon_val {
