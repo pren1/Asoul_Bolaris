@@ -5,13 +5,12 @@ body {
 .card {
   display: inline-block;
   //align-items: center;
-  max-width: 800px;
+  max-width: 1000px;
   border: 1px solid #ebeef5;
   border-radius: 6px;
   overflow: hidden;
   transition: 0.3s ease;
   //padding: -2rem auto;
-  //padding-left: -500px;
 
   &:hover {
     box-shadow: 1px 1px 12px 0 #0000001F;
