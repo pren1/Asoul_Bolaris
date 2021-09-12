@@ -534,11 +534,12 @@ class live_summary(object):
         word_cloud_dict = mw.customize_word_freq_dict(word_freq_dic, word_cloud_num)
 
         res_dict['word_freq_bar_dict'] = word_freq_bar_dict
-        res_dict['word_cloud_dict'] = word_cloud_dict
+        # res_dict['word_cloud_dict'] = word_cloud_dict
 
         with open(f"{self.target_path}/{self.dm_sql_road}_word_cloud.json", "w", encoding='utf8') as outfile:
             json.dump(res_dict, outfile, ensure_ascii=False)
-        # mc.make_wordcloud(word_cloud_dict, ('./image/wordcloud/%s' % self.room_id), self.live_road)
+        save_path = f"{self.target_path}/{self.dm_sql_road}_word_cloud.png"
+        mc.make_wordcloud(word_cloud_dict, ('./image/wordcloud/%s' % self.room_id), self.live_road, save_path)
 
 
 

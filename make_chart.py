@@ -200,8 +200,6 @@ def make_min_picture(my_data, timescale, table_name, road, if_sum, color):
     model = make_interp_spline(x, y)
     xs = np.linspace(np.min(x, axis=0), np.max(x, axis=0), 500)
     ys = model(xs)
-    import pdb
-    pdb.set_trace()
     plt.fill_between(xs, 0, ys, facecolor=color, alpha=0.4)
     plt.plot(xs, ys, c=color)
     plt.grid(True)
@@ -305,7 +303,7 @@ def pc_make_word_freq_bar(my_word_freq_dict, road):
     make_snapshot(snapshot, pictorial_bar.render(), save_path + "pyecharts词频统计%s.png" % road)
 
 
-def make_wordcloud(my_word_freq_dict, path, road):
+def make_wordcloud(my_word_freq_dict, path, road, save_path):
     """
 
     :param my_word_freq_dict: 词频字典
@@ -316,20 +314,21 @@ def make_wordcloud(my_word_freq_dict, path, road):
     img = imread('%s.jpg' % path)
     image_colors = ImageColorGenerator(img)
     mask_img = np.array(img)
-    wc = wordcloud.WordCloud(font_path="/Users/renpeng/Downloads/Bolaris/msyh.ttc",
+    wc = wordcloud.WordCloud(font_path="/home/admin/Bolaris/MSYH.TTC",
                              mask=mask_img,
                              width=1000,
                              height=700,
                              background_color=None,
                              mode="RGBA",
-                             max_words=500)
+                             max_words=250)
     wc.generate_from_frequencies(my_word_freq_dict)
     plt.imshow(wc.recolor(color_func=image_colors))
     plt.clf()
-    save_path = "./output/%s/" % road
-    if os.path.exists(save_path) is False:
-        os.makedirs(save_path)
-    wc.to_file(save_path + "词云%s.png" % road)
+    # save_path = "./output/%s/" % road
+    # if os.path.exists(save_path) is False:
+    #     os.makedirs(save_path)
+    wc.to_file(save_path)
+    print(f"image saved to {save_path}")
 
 
 def get_data(column_name, mysql_conn, live_road):

@@ -1,7 +1,8 @@
 <template>
   <div>
-    <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "单次礼物价格统计"/>
-    <MoneyPie :input_data="input_type_pie_data" :input_theme = "custheme" input_title="礼物营收总计"/>
+<!--    <Test :input_data="input_wordCloud_image_data">233</Test>-->
+    <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "按金额分"/>
+    <MoneyPie :input_data="input_type_pie_data" :input_theme = "custheme" input_title="按类型分"/>
     <LineChart :input_data="input_danmu_line_data" :input_theme="custheme"
                input_title="弹幕数量" input_x_label="开播时长/1mins——时间区段：1mins  "
                input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1"/>
@@ -40,6 +41,7 @@ import mixin from '../mixin.js'
 import MoneyPie from './money_pie.vue'
 import LineChart from './line_chart.vue'
 import BarChart from './word_cloud_hist.vue'
+// import Test from './test.vue'
 
 export default {
   name: "whole_page",
@@ -47,7 +49,8 @@ export default {
   components: {
     MoneyPie,
     LineChart,
-    BarChart
+    BarChart,
+    // Test
   },
   data: () => ({
     custheme: require("../roma.json"),
@@ -62,7 +65,8 @@ export default {
     input_revenue_data_line_data: [],
     input_sc_data_line_data: [],
     input_simu_interact_line_data: [],
-    input_wordCloud_bar_data: []
+    input_wordCloud_bar_data: [],
+    input_wordCloud_image_data: []
   }),
   created() {
     this.pie_url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
@@ -89,6 +93,7 @@ export default {
     },
     my_wordCloud_data(value) {
       this.input_wordCloud_bar_data = value.word_freq_bar_dict
+      this.input_wordCloud_image_data = value.word_cloud_dict
     },
   },
 }

@@ -10,7 +10,7 @@ import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { LineChart } from "echarts/charts";
 import {
-  TitleComponent,
+  // TitleComponent,
   GridComponent,
   TooltipComponent,
   ToolboxComponent
@@ -20,7 +20,7 @@ import VChart from "vue-echarts";
 use([
   CanvasRenderer,
   LineChart,
-  TitleComponent,
+  // TitleComponent,
   GridComponent,
   TooltipComponent,
   ToolboxComponent
@@ -71,10 +71,37 @@ export default {
               top: '4%',
               feature: {
                   dataZoom: {
-                      yAxisIndex: 'none'
+                      yAxisIndex: 'none',
+                      iconStyle: {
+                        borderColor: '#e01f54'
+                      },
+                      emphasis: {
+                          iconStyle: {
+                              borderColor: '#e01f54'
+                          },
+                      }
                   },
-                  dataView: {readOnly: false},
-                  saveAsImage: {}
+                  dataView: {
+                    readOnly: false,
+                    iconStyle: {
+                          borderColor: '#a092f1'
+                      },
+                      emphasis: {
+                          iconStyle: {
+                              borderColor: '#a092f1'
+                          },
+                      }
+                    },
+                  saveAsImage: {
+                    iconStyle: {
+                        borderColor: '#001852'
+                    },
+                    emphasis: {
+                        iconStyle: {
+                            borderColor: '#001852'
+                        },
+                    }
+                  }
               }
           },
           xAxis: {

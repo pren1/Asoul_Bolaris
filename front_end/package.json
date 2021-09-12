@@ -11,6 +11,7 @@
     "bootstrap-vue": "^2.1.0",
     "core-js": "^3.6.5",
     "echarts": "^5.2.0",
+    "echarts-wordcloud": "^2.0.0",
     "vue": "^2.6.11",
     "vue-echarts": "^6.0.0"
   },

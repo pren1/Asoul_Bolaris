@@ -11,8 +11,9 @@ import { use } from "echarts/core";
 import { CanvasRenderer } from "echarts/renderers";
 import { PieChart } from "echarts/charts";
 import {
-  TitleComponent,
+  // TitleComponent,
   TooltipComponent,
+  ToolboxComponent
   // LegendComponent
 } from "echarts/components";
 import VChart from "vue-echarts";
@@ -20,8 +21,9 @@ import VChart from "vue-echarts";
 use([
   CanvasRenderer,
   PieChart,
-  TitleComponent,
+  // TitleComponent,
   TooltipComponent,
+  ToolboxComponent
   // LegendComponent
 ]);
 let dataIndex = -1;
@@ -54,6 +56,34 @@ export default {
     update_chart() {
       this.title = this.input_title
       this.option = {
+        toolbox: {
+              show: true,
+              right: '10%',
+              top: '4%',
+              feature: {
+                  dataView: {
+                    readOnly: false,
+                    iconStyle: {
+                        borderColor: '#a092f1'
+                    },
+                    emphasis: {
+                        iconStyle: {
+                            borderColor: '#a092f1'
+                        },
+                    }
+                  },
+                  saveAsImage: {
+                    iconStyle: {
+                        borderColor: '#001852'
+                    },
+                    emphasis: {
+                        iconStyle: {
+                            borderColor: '#001852'
+                        },
+                    }
+                  }
+              }
+          },
         tooltip: {
           trigger: "item",
           formatter(data) {
@@ -70,8 +100,13 @@ export default {
           {
             name: "Traffic Sources",
             type: "pie",
-            radius: "55%",
+            radius: ['40%', '70%'],
             center: ["50%", "50%"],
+            itemStyle: {
+                borderRadius: 10,
+                borderColor: '#fff',
+                borderWidth: 2
+            },
             data: [
               { value: Math.round(this.money_pie[0][1]), name: this.money_pie[0][0] },
               { value: Math.round(this.money_pie[1][1]), name: this.money_pie[1][0] },
