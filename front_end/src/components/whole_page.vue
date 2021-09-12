@@ -29,6 +29,9 @@
     <LineChart :input_data="input_simu_interact_line_data" :input_theme="custheme"
                input_title="10分钟同接" input_x_label="开播时长/1mins——时间区段：1mins  "
                input_y_label="10分钟同接" calculate_total="" time_scale="1"/>
+    <BarChart :input_data="input_wordCloud_bar_data" :input_theme="custheme"
+               input_title="词云" input_x_label="词语" input_y_label="词语数目"
+                />
   </div>
 </template>
 
@@ -36,13 +39,15 @@
 import mixin from '../mixin.js'
 import MoneyPie from './money_pie.vue'
 import LineChart from './line_chart.vue'
+import BarChart from './word_cloud_hist.vue'
 
 export default {
   name: "whole_page",
   mixins: [mixin],
   components: {
     MoneyPie,
-    LineChart
+    LineChart,
+    BarChart
   },
   data: () => ({
     custheme: require("../roma.json"),
@@ -56,7 +61,8 @@ export default {
     input_new_medal_fans_data_line_data: [],
     input_revenue_data_line_data: [],
     input_sc_data_line_data: [],
-    input_simu_interact_line_data: []
+    input_simu_interact_line_data: [],
+    input_wordCloud_bar_data: []
   }),
   created() {
     this.pie_url = `https://asoulmonitor.xyz/api/data/2021_9_10_22634198_dm_pie_picture.json`
@@ -81,9 +87,9 @@ export default {
       this.input_sc_data_line_data = value.sc_data
       this.input_simu_interact_line_data = value.simu_interact
     },
-    // my_wordCloud_data(value) {
-    //   console.log('my_wordCloud_data available!' + value)
-    // },
+    my_wordCloud_data(value) {
+      this.input_wordCloud_bar_data = value.word_freq_bar_dict
+    },
   },
 }
 </script>
