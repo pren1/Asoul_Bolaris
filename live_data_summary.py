@@ -18,6 +18,7 @@ import pymysql
 import pdb
 import json
 import warnings
+import datetime
 warnings.filterwarnings("ignore")
 
 class live_summary(object):
@@ -48,7 +49,7 @@ class live_summary(object):
             self.mysql_conn = pymysql.connect(host=self.host, port=self.port,
                                               user=self.user, password=self.password, db=self.db)
 
-
+            self.extract_live_info()
         except Exception as e:
             print("connect failed")
             raise e
@@ -68,16 +69,23 @@ class live_summary(object):
         # replace only the my_database with the name of your database
         cur.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'asoul_live'")
 
-        result = set()
+        res_dict = {}
         # Read and print tables
         for table in [tables[0] for tables in cur.fetchall()]:
             # print(table)
             if table[-2:] == 'rq':
                 list_res = table.split('_')
-                result.add(list_res[0] + '_' + list_res[1] + '_' + list_res[2] + '&' + list_res[3])
-        # print(result)
+                res_dict[list_res[0] + '_' + list_res[1] + '_' + list_res[2] + '&' + list_res[3]] = list_res[0] + '_' + list_res[1] + '_' + list_res[2]
+
+        def key(s):
+            fmt = "%Y_%m_%d"
+            s = ''.join(s.rsplit(':', 1))  # remove colon from offset
+            return datetime.datetime.strptime(s, fmt)
+        new_dict = sorted(res_dict.items(), key=lambda item: key(item[1]), reverse=True)
+        # print(new_dict)
+        date_list = [x[0] for x in new_dict]
         with open(f"{self.target_path}/live_list.json", "w", encoding='utf8') as outfile:
-            json.dump(list(result), outfile, ensure_ascii=False)
+            json.dump(date_list, outfile, ensure_ascii=False)
         # pdb.set_trace()
 
     def get_everyday_live_stats(self):
@@ -139,8 +147,16 @@ class live_summary(object):
         #  1.生成直播小结、营收饼图
         user_stats, user_data = self.__everyday_live_stats(default_time, end_time, live_data_group_by_id)
 
+        # print(live_data_group_by_type)
+        if len(live_data_group_by_type) == 0:
+            print("No live!")
+            return False
         # 2.生成词频图 词云图
-        self.__wordfreq_wordcloud(live_data_group_by_type)
+        try:
+            self.__wordfreq_wordcloud(live_data_group_by_type)
+        except:
+            print("word generation failed!")
+            return False
 
         # 3.生成舰长图、礼物图、粉丝图、进入图、营收图、同接图、sc图、弹幕图
         self.__make_stats_picture(all_data)
@@ -148,9 +164,9 @@ class live_summary(object):
         # # 4.生成直播饼图
         self.__make_revenue_picture(user_stats)
 
-        self.extract_live_info()
         # 5.存储fans数据到mysql
         # self.__fans_stats2sql(user_data, live_data_group_by_id)
+        return True
 
     # 直播小结功能
     def __everyday_live_stats(self, my_default_time, my_end_time, my_live_data_group_by_id):

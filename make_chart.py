@@ -316,11 +316,11 @@ def make_wordcloud(my_word_freq_dict, path, road, save_path):
     mask_img = np.array(img)
     wc = wordcloud.WordCloud(font_path="/home/admin/Bolaris/MSYH.TTC",
                              mask=mask_img,
-                             width=500,
-                             height=350,
+                             width=1000,
+                             height=700,
                              background_color=None,
                              mode="RGBA",
-                             max_words=250)
+                             max_words=500)
     wc.generate_from_frequencies(my_word_freq_dict)
     plt.imshow(wc.recolor(color_func=image_colors))
     plt.clf()
