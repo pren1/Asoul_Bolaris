@@ -15,7 +15,7 @@ def process_live_data(room_id, live_date, target_path="/home/admin/public/data/"
 if __name__ == '__main__':
     target_path = "/home/admin/public/data/"
     # target_path = '/Users/renpeng/Downloads/Bolaris/'
-    process_live_data('22634198', '2021_9_10', target_path)
+    process_live_data('22632157', '2021_9_5', target_path)
 
     live_json_readin = target_path + 'live_list.json'
     with open(live_json_readin) as json_file:

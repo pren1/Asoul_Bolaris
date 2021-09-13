@@ -5,6 +5,11 @@ scp /Users/renpeng/Downloads/Bolaris/process_data.py root@47.242.222.3:/home/adm
 scp /Users/renpeng/Downloads/Bolaris/bilibili_live_data_summary.py root@47.242.222.3:/home/admin/Bolaris/
 scp /Users/renpeng/Downloads/Bolaris/live_data_summary.py root@47.242.222.3:/home/admin/Bolaris/
 
+#scp /Users/renpeng/Downloads/Bolaris/background.png root@47.242.222.3:/home/admin/public/data/
 #scp -r /Users/renpeng/Downloads/Bolaris/word_dict root@47.242.222.3:/home/admin/Bolaris/
+
+#scp -r /Users/renpeng/Downloads/Bolaris/image/wordcloud/22632157.jpg root@47.242.222.3:/home/admin/Bolaris/image/wordcloud/
+
+#scp -r /Users/renpeng/Downloads/Bolaris/avatar/ root@47.242.222.3:/home/admin/public/data/
 
 #scp root@47.242.222.3:/home/admin/public/data/2021_9_11_22637261_dm_word_cloud.png /Users/renpeng/Downloads/Bolaris/

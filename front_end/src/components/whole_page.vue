@@ -106,12 +106,14 @@ export default {
     "22634198": "#B8A6D9",
     "22637261": "#E799B0",
     "22625027": "#576690",
-    "other":  "#000000"
+    "22632157":  "#000000"
     }
     // document.querySelector('body').style.setProperty('example', test);
     document.querySelector('body').style.setProperty('--main-color', color_selector[user_id]);
   },
   mounted() {
+    this.$router.onReady(() => this.routeLoaded());
+    console.log("mounted called")
     window.addEventListener('load', () => {
         // run after everything is in-place
         console.log("width" + screen.width)
@@ -122,6 +124,9 @@ export default {
     })
   },
   watch: {
+    $route() {
+            this.$nextTick(this.routeLoaded);
+    },
     my_pie_data(value) {
       console.log('my_pie_data available!')
       this.input_money_pie_data = value.money_pie
@@ -144,6 +149,17 @@ export default {
       this.input_wordCloud_image_data = value.word_cloud_dict
     },
   },
+  methods: {
+    routeLoaded() {
+          //Dom for the current route is loaded
+          console.log("Router loaded!")
+          console.log("width: " + screen.width)
+          if (screen.width > 700){
+              document.getElementById('myPElement').style.maxWidth = screen.width + 'px';
+            }
+            document.getElementById('myPElement').style.backgroundImage = 'url(' + this.image_url + ')';
+        }
+  }
 }
 </script>
 

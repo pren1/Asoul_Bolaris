@@ -155,7 +155,7 @@ class live_summary(object):
         try:
             self.__wordfreq_wordcloud(live_data_group_by_type)
         except:
-            print("word generation failed!")
+            print("word generation failed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
             return False
 
         # 3.生成舰长图、礼物图、粉丝图、进入图、营收图、同接图、sc图、弹幕图
@@ -400,7 +400,7 @@ class live_summary(object):
                 new_stats_list[my_type].append(num)
         res_dict = {}
         # 礼物图   1mins
-        mc.make_min_picture(new_stats_list['gift'], 1, '送礼人次', self.live_road, 1, self.line_color[self.room_id])
+        # mc.make_min_picture(new_stats_list['gift'], 1, '送礼人次', self.live_road, 1, self.line_color[self.room_id])
         # 弹幕图   1mins
         # mc.make_min_picture(new_stats_list['danmu'], 1, '弹幕数量', self.live_road, 1, self.line_color[self.room_id])
         # sc图    3mins
