@@ -6,6 +6,7 @@ from collections import namedtuple
 from pprint import pprint
 from datetime import date
 from bilibili_live_data_summary import process_live_data
+import json
 
 class process_data(object):
     def __init__(self):
@@ -44,7 +45,19 @@ class process_data(object):
                 room_id = vtb_info.room_id
                 live_date = self.current_date()
                 print(f"{name} 下播啦, 正在处理{room_id}数据, 时间：{live_date}")
-                process_live_data(room_id, live_date, target_path = "/home/admin/public/data/")
+                target_path = "/home/admin/public/data/"
+                process_live_data(room_id, live_date, target_path = target_path)
+
+                # Load live list
+                live_json_readin = target_path + 'real_live_list.json'
+                with open(live_json_readin) as json_file:
+                    live_list = json.load(json_file)
+
+                # Push new live info
+                live_list.insert(0, live_date + "&" + room_id)
+                # save the updated results
+                with open(f"{target_path}/real_live_list.json", "w", encoding='utf8') as outfile:
+                    json.dump(live_list, outfile, ensure_ascii=False)
 
             'Update the room status'
             self.asoul_uid_dict[name] = self.asoul_uid_dict[name]._replace(is_live=current_room_status)
