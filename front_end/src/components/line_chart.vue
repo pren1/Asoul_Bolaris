@@ -27,7 +27,7 @@ use([
 ]);
 
 export default {
-  props: ['input_data', 'input_theme', 'input_title', 'input_x_label', 'input_y_label', 'calculate_total', 'time_scale'],
+  props: ['input_data', 'input_theme', 'input_title', 'input_x_label', 'input_y_label', 'calculate_total', 'time_scale', 'input_color'],
   name: "line_chart",
   components: {
     VChart
@@ -65,7 +65,7 @@ export default {
         this.title += "合计：" + Math.round(this.data_array_1d.reduce((x, y) => x + y))
       }
       this.option = {
-          backgroundColor: 'white',
+          backgroundColor: 'rgba(255, 255, 255, 1.0)',
           toolbox: {
               show: true,
               right: '10%',
@@ -126,9 +126,9 @@ export default {
              axisLine:{
               show:false
              },
-              name: this.input_y_label,
-              nameLocation: 'middle',
-              nameGap: 50
+             name: this.input_y_label,
+             // nameLocation: 'middle',
+             // nameGap: 50
           },
          tooltip: {
             trigger: 'axis',
@@ -152,7 +152,12 @@ export default {
           type: 'line',
           smooth: true,
           showSymbol: false,
-          areaStyle: {}
+          itemStyle: {
+            color: this.input_color
+          },
+          areaStyle: {
+              color: this.input_color
+          }
         }]
       }
     }
@@ -163,6 +168,6 @@ export default {
 <style scoped>
 .chart {
   height: 400px;
-  padding-left: 1rem;
+  /*padding-left: 1rem;*/
 }
 </style>

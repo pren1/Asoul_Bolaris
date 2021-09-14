@@ -314,6 +314,7 @@ def make_wordcloud(my_word_freq_dict, path, road, save_path):
     img = imread('%s.jpg' % path)
     image_colors = ImageColorGenerator(img)
     mask_img = np.array(img)
+    # wc = wordcloud.WordCloud(font_path="/Users/renpeng/Downloads/Bolaris/MSYH.TTC",
     wc = wordcloud.WordCloud(font_path="/home/admin/Bolaris/MSYH.TTC",
                              mask=mask_img,
                              width=1000,
@@ -322,14 +323,16 @@ def make_wordcloud(my_word_freq_dict, path, road, save_path):
                              mode="RGBA",
                              max_words=500)
     wc.generate_from_frequencies(my_word_freq_dict)
-    plt.imshow(wc.recolor(color_func=image_colors))
+
+    image_colors.default_color = [0.6, 0.6, 0.6]  # any value for RGB
+    # generate word cloud
+    plt.imshow(wc.recolor(None, color_func=image_colors))
     plt.clf()
     # save_path = "./output/%s/" % road
     # if os.path.exists(save_path) is False:
     #     os.makedirs(save_path)
     wc.to_file(save_path)
     print(f"image saved to {save_path}")
-
 
 def get_data(column_name, mysql_conn, live_road):
     """

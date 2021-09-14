@@ -152,11 +152,12 @@ class live_summary(object):
             print("No live!")
             return False
         # 2.生成词频图 词云图
-        try:
-            self.__wordfreq_wordcloud(live_data_group_by_type)
-        except:
-            print("word generation failed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            return False
+        self.__wordfreq_wordcloud(live_data_group_by_type)
+        # try:
+        #
+        # except:
+        #     print("word generation failed!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+        #     return False
 
         # 3.生成舰长图、礼物图、粉丝图、进入图、营收图、同接图、sc图、弹幕图
         self.__make_stats_picture(all_data)

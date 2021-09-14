@@ -36,7 +36,7 @@ export default {
     }
   },
   created() {
-    this.global_list_url = `https://asoulmonitor.xyz/api/data/live_list.json`
+    this.global_list_url = `https://asoulmonitor.xyz/api/data/real_live_list.json`
   },
   mounted() {
     this.scroll()
@@ -64,7 +64,7 @@ export default {
         "22634198": "Carlo",
         "22637261": "diana",
         "22625027": "Queen",
-        "22632157":  "asoul"
+        "22632157": "asoul"
       }
       let room_id = info_str.split('&')[1]
       return `https://asoulmonitor.xyz/api/data/avatar/${header_selector[room_id]}.jpg`

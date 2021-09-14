@@ -8,7 +8,7 @@ scp /Users/renpeng/Downloads/Bolaris/live_data_summary.py root@47.242.222.3:/hom
 #scp /Users/renpeng/Downloads/Bolaris/background.png root@47.242.222.3:/home/admin/public/data/
 #scp -r /Users/renpeng/Downloads/Bolaris/word_dict root@47.242.222.3:/home/admin/Bolaris/
 
-#scp -r /Users/renpeng/Downloads/Bolaris/image/wordcloud/22632157.jpg root@47.242.222.3:/home/admin/Bolaris/image/wordcloud/
+#scp -r /Users/renpeng/Downloads/Bolaris/image/wordcloud/ root@47.242.222.3:/home/admin/Bolaris/image/
 
 #scp -r /Users/renpeng/Downloads/Bolaris/avatar/ root@47.242.222.3:/home/admin/public/data/
 

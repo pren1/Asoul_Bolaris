@@ -1,10 +1,10 @@
 <template>
   <div class="container background_img" id="myPElement">
     <BarChart :input_data="input_wordCloud_bar_data" :input_theme="custheme"
-               input_title="词频统计" input_x_label="词语" input_y_label="词语数目"
+               input_title="词频统计" input_x_label="词语" input_y_label="词语数目" :input_color="this.target_color"
                 />
     <div class="card">
-      <h2 class="title">词云</h2>
+      <h2 class="title" style="background-color: white; color: black">词云</h2>
       <img width="50%" :src="image_url" alt="Image">
     </div>
     <div class="container_2">
@@ -14,35 +14,35 @@
     <div class="container_2">
       <LineChart :input_data="input_danmu_line_data" :input_theme="custheme"
                input_title="弹幕数量" input_x_label="开播时长/1mins——时间区段：1mins  "
-               input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1"/>
+               input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
       <LineChart :input_data="input_entry_line_data" :input_theme="custheme"
                  input_title="入场人次" input_x_label="开播时长/1mins——时间区段：1mins  "
-                 input_y_label="入场人次" calculate_total="计算总和" time_scale="1"/>
+                 input_y_label="入场人次" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
       <LineChart :input_data="input_gift_line_data" :input_theme="custheme"
                  input_title="送礼人次" input_x_label="开播时长/1mins——时间区段：1mins  "
-                 input_y_label="送礼人次" calculate_total="计算总和" time_scale="1"/>
+                 input_y_label="送礼人次" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
     </div>
     <div class="container_2">
       <LineChart :input_data="input_guard_data_line_data" :input_theme="custheme"
                  input_title="舰团数量" input_x_label="开播时长/1mins——时间区段：3mins  "
-                 input_y_label="舰团数量" calculate_total="计算总和" time_scale="3"/>
+                 input_y_label="舰团数量" calculate_total="计算总和" time_scale="3" :input_color="this.target_color"/>
       <LineChart :input_data="input_new_fans_data_line_data" :input_theme="custheme"
                  input_title="新增粉丝" input_x_label="开播时长/1mins——时间区段：3mins  "
-                 input_y_label="新增粉丝" calculate_total="计算总和" time_scale="3"/>
+                 input_y_label="新增粉丝" calculate_total="计算总和" time_scale="3" :input_color="this.target_color"/>
       <LineChart :input_data="input_new_medal_fans_data_line_data" :input_theme="custheme"
                  input_title="新增粉丝团" input_x_label="开播时长/1mins——时间区段：3mins  "
-                 input_y_label="新增粉丝团" calculate_total="计算总和" time_scale="3"/>
+                 input_y_label="新增粉丝团" calculate_total="计算总和" time_scale="3" :input_color="this.target_color"/>
     </div>
     <div class="container_2">
       <LineChart :input_data="input_revenue_data_line_data" :input_theme="custheme"
                  input_title="营收" input_x_label="开播时长/1mins——时间区段：1mins  "
-                 input_y_label="营收" calculate_total="计算总和" time_scale="1"/>
+                 input_y_label="营收" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
       <LineChart :input_data="input_sc_data_line_data" :input_theme="custheme"
                  input_title="sc数量" input_x_label="开播时长/1mins——时间区段：3mins  "
-                 input_y_label="sc数量" calculate_total="计算总和" time_scale="3"/>
+                 input_y_label="sc数量" calculate_total="计算总和" time_scale="3" :input_color="this.target_color"/>
       <LineChart :input_data="input_simu_interact_line_data" :input_theme="custheme"
                  input_title="10分钟同接" input_x_label="开播时长/1mins——时间区段：1mins  "
-                 input_y_label="10分钟同接" calculate_total="" time_scale="1"/>
+                 input_y_label="10分钟同接" calculate_total="" time_scale="1" :input_color="this.target_color"/>
     </div>
     <div></div>
   </div>
@@ -84,7 +84,8 @@ export default {
     input_sc_data_line_data: [],
     input_simu_interact_line_data: [],
     input_wordCloud_bar_data: [],
-    input_wordCloud_image_data: []
+    input_wordCloud_image_data: [],
+    target_color: ""
   }),
   created() {
     console.log("live info" + this.$route.params.live_info)
@@ -109,7 +110,8 @@ export default {
     "22632157":  "#000000"
     }
     // document.querySelector('body').style.setProperty('example', test);
-    document.querySelector('body').style.setProperty('--main-color', color_selector[user_id]);
+    this.target_color = color_selector[user_id];
+    document.querySelector('body').style.setProperty('--main-color', this.target_color);
   },
   mounted() {
     this.$router.onReady(() => this.routeLoaded());

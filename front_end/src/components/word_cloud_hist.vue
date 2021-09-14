@@ -27,7 +27,7 @@ use([
 ]);
 
 export default {
-  props: ['input_data', 'input_theme', 'input_title', 'input_x_label', 'input_y_label'],
+  props: ['input_data', 'input_theme', 'input_title', 'input_x_label', 'input_y_label', 'input_color'],
   name: "bar_chart",
   components: {
     VChart
@@ -74,7 +74,7 @@ export default {
       // console.log("xdata: " + this.x_data)
       // console.log("ydata: " + this.y_data)
       this.option = {
-          backgroundColor: 'white',
+          backgroundColor: 'rgba(255, 255, 255, 1.0)',
           toolbox: {
               show: true,
               right: '10%',
@@ -137,8 +137,8 @@ export default {
               show:false
              },
               name: this.input_y_label,
-              nameLocation: 'middle',
-              nameGap: 40
+              // nameLocation: 'middle',
+              // nameGap: 40
           },
           tooltip: {
               trigger: 'axis',
@@ -165,7 +165,13 @@ export default {
          //  },
         series: [{
           data: this.y_data,
-          type: 'bar'
+          type: 'bar',
+          itemStyle: {
+            color: this.input_color
+          },
+          areaStyle: {
+              color: this.input_color
+          }
         }]
       }
     }
@@ -176,6 +182,6 @@ export default {
 <style scoped>
 .chart {
   height: 400px;
-  padding-left: 1rem;
+  /*padding-left: 1rem;*/
 }
 </style>
