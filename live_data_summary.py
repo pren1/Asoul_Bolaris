@@ -577,7 +577,7 @@ class live_summary(object):
 
         with open(f"{self.target_path}/{self.dm_sql_road}_word_cloud.json", "w", encoding='utf8') as outfile:
             json.dump(res_dict, outfile, ensure_ascii=False)
-        save_path = f"{self.target_path}/{self.dm_sql_road}_word_cloud.png"
+        save_path = f"{self.target_path}/{self.dm_sql_road}_word_cloud.webp"
         mc.make_wordcloud(word_cloud_dict, ('./image/wordcloud/%s' % self.room_id), self.live_road, save_path)
 
 

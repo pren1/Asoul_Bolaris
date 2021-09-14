@@ -95,10 +95,10 @@ export default {
     this.pie_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_pie_picture.json`
     this.stats_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_stats_picture.json`
     this.wordCloud_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_word_cloud.json`
-    this.image_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_word_cloud.png`
+    this.image_url = `https://asoulmonitor.xyz/api/data/${target_link}_dm_word_cloud.webp`
 
-    let test = "https://asoulmonitor.xyz/api/data/" + target_link + "_dm_word_cloud.png"
-    console.log(test)
+    // let test = "https://asoulmonitor.xyz/api/data/" + target_link + "_dm_word_cloud.png"
+    // console.log(test)
     let user_id = info[1]
 
     let color_selector = {

@@ -67,7 +67,7 @@ export default {
         "22632157": "asoul"
       }
       let room_id = info_str.split('&')[1]
-      return `https://asoulmonitor.xyz/api/data/avatar/${header_selector[room_id]}.jpg`
+      return `https://asoulmonitor.xyz/api/data/avatar/${header_selector[room_id]}.webp`
     },
     provide_live_date(info_str){
       return '直播日期：' + info_str.split('&')[0]
@@ -80,6 +80,7 @@ export default {
 #rating {
   max-width: 700px;
   margin: 0 auto;
+  //margin-top: -1.5rem;
 
   .item {
     position: relative;
@@ -88,6 +89,7 @@ export default {
     transition: 0.3s ease;
     box-shadow: 1px 1px 4px #0000;
     background-color: white;
+    //margin-top: 1.5rem;
 
     &:hover {
       box-shadow: 1px 1px 4px #0000005F;
@@ -151,7 +153,7 @@ export default {
 
 .background_img{
   /*background-color: black;*/
-   background-image: url("https://asoulmonitor.xyz/api/data/background.png");
+   background-image: url("https://asoulmonitor.xyz/api/data/background.webp");
    background-repeat: no-repeat;
    background-position: center center; /* Center the image */
    background-size: 105%, contain;

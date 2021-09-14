@@ -321,7 +321,7 @@ def make_wordcloud(my_word_freq_dict, path, road, save_path):
                              height=700,
                              background_color=None,
                              mode="RGBA",
-                             max_words=500)
+                             max_words=400)
     wc.generate_from_frequencies(my_word_freq_dict)
 
     image_colors.default_color = [0.6, 0.6, 0.6]  # any value for RGB
