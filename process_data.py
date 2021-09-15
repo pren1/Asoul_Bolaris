@@ -22,9 +22,9 @@ class process_data(object):
             'A-SOUL_Official':self.vtb_info('703007996', '22632157', 0)
         }
 
-    # def obtain_single_vtb_room_info_via_uid(self, uid):
-    #     contents = requests.get(f'https://api.vtbs.moe/v1/detail/{uid}').json()
-    #     return contents['liveStatus']
+    def obtain_single_vtb_room_info_via_uid(self, uid):
+        contents = requests.get(f'https://api.vtbs.moe/v1/detail/{uid}').json()
+        return contents['title']
 
     def obtain_all_live_roomid(self):
         contents = requests.get(f'https://api.vtbs.moe/v1/living').json()
@@ -41,20 +41,25 @@ class process_data(object):
         for name, vtb_info in self.asoul_uid_dict.items():
             current_room_status = self.obtain_single_vtb_room_status(vtb_info.room_id, room_id_live_list)
             previous_room_status = vtb_info.is_live
+            if current_room_status == 1 and previous_room_status == 0:
+                title = self.obtain_single_vtb_room_info_via_uid(vtb_info.uid)
+                print(f"{name} 上播啦， 直播间标题为：{title}")
+
             if current_room_status == 0 and previous_room_status == 1:
                 room_id = vtb_info.room_id
                 live_date = self.current_date()
-                print(f"{name} 下播啦, 正在处理{room_id}数据, 时间：{live_date}")
-                target_path = "/home/admin/public/data/"
-                process_live_data(room_id, live_date, target_path = target_path)
+                print(f"{name} 下播啦, 正在处理{room_id}数据, 时间：{live_date}, 标题：{title}")
 
+                process_live_data(room_id, live_date)
+
+                target_path = "/home/admin/public/active/"
                 # Load live list
                 live_json_readin = target_path + 'real_live_list.json'
                 with open(live_json_readin) as json_file:
                     live_list = json.load(json_file)
 
                 # Push new live info
-                live_list.insert(0, live_date + "&" + room_id)
+                live_list.insert(0, live_date + "&" + room_id + "&" + title)
                 # save the updated results
                 with open(f"{target_path}/real_live_list.json", "w", encoding='utf8') as outfile:
                     json.dump(live_list, outfile, ensure_ascii=False)
@@ -62,7 +67,6 @@ class process_data(object):
             'Update the room status'
             self.asoul_uid_dict[name] = self.asoul_uid_dict[name]._replace(is_live=current_room_status)
         pprint(self.asoul_uid_dict)
-
 
     def begin_update_data_periodically(self):
         timerThread = threading.Thread(target=self.timer_func)
@@ -80,6 +84,7 @@ class process_data(object):
 
 if __name__ == '__main__':
     PD = process_data()
-    # PD.obtain_single_vtb_room_status('672328094')
+    # PD.obtain_single_vtb_room_info_via_uid('672328094')
+    # pdb.set_trace()
     # PD.current_date()
     PD.begin_update_data_periodically()

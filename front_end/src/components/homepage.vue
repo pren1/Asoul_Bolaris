@@ -1,6 +1,9 @@
 <template>
   <div  class="background_img">
-    <div id="rating">
+    <div id="navbar" class="sticky">
+      <a>A-soul 数据组: 直播数据统计</a>
+    </div>
+    <div id="rating" class="content">
       <div class="item" v-for="info_str in global_list.slice(0, list_length)" :key="info_str">
         <router-link class="avatar" :to="'/' + info_str">
           <img width="128" height="128" :src="provide_correct_url(info_str)" alt="头像"/>
@@ -11,7 +14,7 @@
             </p>
   <!--          <p class="value">同传总字数：</p>-->
             <p class="desc">
-              一代鬃狮：数据获取错误，你仅仅只得到了一只狮子。
+              一代鬃狮：数据获取错误。
             </p>
         </div>
       </div>
@@ -36,7 +39,7 @@ export default {
     }
   },
   created() {
-    this.global_list_url = `https://asoulmonitor.xyz/api/data/real_live_list.json`
+    this.global_list_url = `https://asoulmonitor.xyz/api/active/real_live_list.json`
   },
   mounted() {
     this.scroll()
@@ -55,7 +58,22 @@ export default {
           }, 500);
           // console.log("hello~")
         }
+        // myFunction()
       }
+      // // Get the navbar
+      // var navbar = document.getElementById("navbar");
+      //
+      // // Get the offset position of the navbar
+      // var sticky = navbar.offsetTop;
+      //
+      // // Add the sticky class to the navbar when you reach its scroll position. Remove "sticky" when you leave the scroll position
+      // function myFunction() {
+      //   if (window.pageYOffset >= sticky) {
+      //     navbar.classList.add("sticky")
+      //   } else {
+      //     // navbar.classList.remove("sticky");
+      //   }
+      // }
     },
     provide_correct_url(info_str){
       let header_selector = {
@@ -80,7 +98,6 @@ export default {
 #rating {
   max-width: 700px;
   margin: 0 auto;
-  //margin-top: -1.5rem;
 
   .item {
     position: relative;
@@ -156,7 +173,44 @@ export default {
    background-image: url("https://asoulmonitor.xyz/api/data/background.webp");
    background-repeat: no-repeat;
    background-position: center center; /* Center the image */
-   background-size: 105%, contain;
+   background-size: cover;
    background-attachment: fixed;
+   display: flex;
+   justify-content: center;
+   align-items: center;
 }
+
+/* Style the navbar */
+#navbar {
+  overflow: hidden;
+  background-color: #333;
+  z-index: 100;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  box-shadow: 1px 1px 4px #0000;
+}
+
+/* Navbar links */
+#navbar a {
+  //float: start;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+
+///* Page content */
+.content {
+  padding-top: 50px;
+}
+
+/* The sticky class is added to the navbar with JS when it reaches its scroll position */
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  //min-width: 750px;
+}
+
 </style>

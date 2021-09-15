@@ -127,9 +127,9 @@ export default {
               rotate: 30 //If the label names are too long you can manage this by rotating the label.
             },
             data: this.x_data,
-            name: this.input_x_label,
-            nameLocation: 'middle',
-            nameGap: 30
+            // name: this.input_x_label,
+            // nameLocation: 'middle',
+            // nameGap: 30
           },
           yAxis: {
              type: 'value',
