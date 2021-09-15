@@ -1,7 +1,7 @@
 <template>
   <div  class="background_img">
     <div id="navbar" class="sticky">
-      <a>A-soul 数据组: 直播数据统计</a>
+      <a>A-soul 直播数据统计（来源：A-soul 数据组)</a>
     </div>
     <div id="rating" class="content">
       <div class="item" v-for="info_str in global_list.slice(0, list_length)" :key="info_str">
@@ -9,12 +9,39 @@
           <img width="128" height="128" :src="provide_correct_url(info_str)" alt="头像"/>
         </router-link>
         <div class="detail">
-            <p class="title">
-              {{provide_live_date(info_str)}}
-            </p>
+            <div v-if="info_str.split('&')[1] === '22625025'">
+              <p class="title" style="color: #9AC8E2">
+                {{provide_live_name(info_str)}}
+              </p>
+            </div>
+            <div v-else-if="info_str.split('&')[1] === '22632424'">
+              <p class="title" style="color: #DB7D74">
+                {{provide_live_name(info_str)}}
+              </p>
+            </div>
+            <div v-else-if="info_str.split('&')[1] === '22634198'">
+              <p class="title" style="color: #B8A6D9">
+                {{provide_live_name(info_str)}}
+              </p>
+            </div>
+            <div v-else-if="info_str.split('&')[1] === '22637261'">
+              <p class="title" style="color: #E799B0">
+                {{provide_live_name(info_str)}}
+              </p>
+            </div>
+            <div v-else-if="info_str.split('&')[1] === '22625027'">
+              <p class="title" style="color: #576690">
+                {{provide_live_name(info_str)}}
+              </p>
+            </div>
+            <div v-else-if="info_str.split('&')[1] === '22632157'">
+                <p class="title" style="color: #000000">
+                  {{provide_live_name(info_str)}}
+                </p>
+            </div>
   <!--          <p class="value">同传总字数：</p>-->
             <p class="desc">
-              一代鬃狮：数据获取错误。
+              {{provide_live_date(info_str)}}
             </p>
         </div>
       </div>
@@ -40,6 +67,9 @@ export default {
   },
   created() {
     this.global_list_url = `https://asoulmonitor.xyz/api/active/real_live_list.json`
+    document.title = 'A-soul 直播数据统计'
+    let icon_path =  `https://asoulmonitor.xyz/api/data/avatar/asoul.webp`
+    document.querySelector("[rel='icon']").setAttribute('href', icon_path);
   },
   mounted() {
     this.scroll()
@@ -89,6 +119,9 @@ export default {
     },
     provide_live_date(info_str){
       return '直播日期：' + info_str.split('&')[0]
+    },
+    provide_live_name(info_str){
+      return info_str.split('&')[2]
     }
   }
 }
@@ -96,7 +129,8 @@ export default {
 
 <style scoped lang="scss">
 #rating {
-  max-width: 700px;
+  max-width: 500px;
+  //width: 50%;
   margin: 0 auto;
 
   .item {
@@ -145,12 +179,19 @@ export default {
     padding-left: 9rem;
 
     @media (min-width: 720px) {
-      padding-left: 11rem;
+      padding-left: 9rem;
     }
 
     .title {
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.8rem;
+      //padding-left: 0.5rem;
+    }
+
+    .desc {
+      font-size: 1.8rem;
+      font-weight: bold;
+      padding-left: 1rem;
     }
 
     p {

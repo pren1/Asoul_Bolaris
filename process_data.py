@@ -24,7 +24,7 @@ class process_data(object):
 
     def obtain_single_vtb_room_info_via_uid(self, uid):
         contents = requests.get(f'https://api.vtbs.moe/v1/detail/{uid}').json()
-        return contents['title']
+        return f"【{contents['title']}】"
 
     def obtain_all_live_roomid(self):
         contents = requests.get(f'https://api.vtbs.moe/v1/living').json()
@@ -48,6 +48,9 @@ class process_data(object):
             if current_room_status == 0 and previous_room_status == 1:
                 room_id = vtb_info.room_id
                 live_date = self.current_date()
+                if not title:
+                    title = "未知标题"
+
                 print(f"{name} 下播啦, 正在处理{room_id}数据, 时间：{live_date}, 标题：{title}")
 
                 process_live_data(room_id, live_date)
@@ -66,7 +69,7 @@ class process_data(object):
 
             'Update the room status'
             self.asoul_uid_dict[name] = self.asoul_uid_dict[name]._replace(is_live=current_room_status)
-        pprint(self.asoul_uid_dict)
+        # pprint(self.asoul_uid_dict)
 
     def begin_update_data_periodically(self):
         timerThread = threading.Thread(target=self.timer_func)

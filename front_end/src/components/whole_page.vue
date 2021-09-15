@@ -8,8 +8,8 @@
       <img width="50%" :src="image_url" alt="Image">
     </div>
     <div class="container_2">
-      <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "按金额分"/>
-      <MoneyPie :input_data="input_type_pie_data" :input_theme = "custheme" input_title="按类型分"/>
+      <MoneyPie :input_data="input_money_pie_data" :input_theme = "custheme" input_title = "营收构成图（金额）"/>
+      <MoneyPie :input_data="input_type_pie_data" :input_theme = "custheme" input_title="营收构成图（类型）"/>
     </div>
     <div class="container_2">
       <LineChart :input_data="input_danmu_line_data" :input_theme="custheme"
@@ -112,6 +112,27 @@ export default {
     // document.querySelector('body').style.setProperty('example', test);
     this.target_color = color_selector[user_id];
     document.querySelector('body').style.setProperty('--main-color', this.target_color);
+
+    let title_selector = {
+    "22625025": "向晚大魔王",
+    "22632424": "贝拉kira",
+    "22634198": "珈乐Carol",
+    "22637261": "嘉然今天吃什么",
+    "22625027": "乃琳Queen",
+    "22632157":  "A-SOUL_Official"
+    }
+    document.title = title_selector[user_id]
+
+    let header_selector = {
+        "22625025": "AvA",
+        "22632424": "Bira",
+        "22634198": "Carlo",
+        "22637261": "diana",
+        "22625027": "Queen",
+        "22632157": "asoul"
+      }
+    let icon_path =  `https://asoulmonitor.xyz/api/data/avatar/${header_selector[user_id]}.webp`
+    document.querySelector("[rel='icon']").setAttribute('href', icon_path);
   },
   mounted() {
     this.$router.onReady(() => this.routeLoaded());
