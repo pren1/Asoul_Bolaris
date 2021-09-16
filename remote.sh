@@ -16,4 +16,6 @@ scp /Users/renpeng/Downloads/Bolaris/live_data_summary.py root@47.242.222.3:/hom
 
 #scp -r /Users/renpeng/Downloads/Bolaris/real_live_list.json root@47.242.222.3:/home/admin/public/active/
 
+
+#scp -r /Users/renpeng/Downloads/Bolaris/time_seq.json root@47.242.222.3:/home/admin/public/active/
 #scp root@47.242.222.3:/home/admin/public/data/2021_9_11_22637261_dm_word_cloud.png /Users/renpeng/Downloads/Bolaris/
