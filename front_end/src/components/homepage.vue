@@ -71,6 +71,9 @@ export default {
     list_length: 10
   }),
   watch: {
+    $route() {
+            this.$nextTick(this.routeLoaded);
+    },
     my_global_list(value) {
       // console.log(logs)
       this.global_list = value
@@ -90,27 +93,13 @@ export default {
     this.home_chart_url = `https://asoulmonitor.xyz/api/active/time_seq.json`
   },
   mounted() {
+    this.$router.onReady(() => this.routeLoaded());
     this.scroll()
   },
   methods: {
-    scroll() {
-      let isLoading = false
-      window.onscroll = () => {
-        // 距离底部200px时加载一次
-        let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
-        if (bottomOfWindow && isLoading === false) {
-          isLoading = true
-          this.list_length += 10
-          setTimeout(() => {
-              isLoading = false
-          }, 500);
-          // console.log("hello~")
-        }
-        // myFunction()
-      }
-      window.addEventListener('load', () => {
-        // run after everything is in-place
-        console.log("width" + screen.width)
+    routeLoaded() {
+          //Dom for the current route is loaded
+          console.log("width" + screen.width)
         if (screen.width < 1200){
           document.getElementById('myPElement').style.width = '100%';
           document.getElementById('myPElement').style.height = '55%';
@@ -126,9 +115,22 @@ export default {
         } else {
           document.querySelector('body').style.setProperty('--font-size', '1.8rem');
         }
-
-
-      })
+        },
+    scroll() {
+      let isLoading = false
+      window.onscroll = () => {
+        // 距离底部200px时加载一次
+        let bottomOfWindow = document.documentElement.offsetHeight - document.documentElement.scrollTop - window.innerHeight <= 200
+        if (bottomOfWindow && isLoading === false) {
+          isLoading = true
+          this.list_length += 10
+          setTimeout(() => {
+              isLoading = false
+          }, 500);
+          // console.log("hello~")
+        }
+        // myFunction()
+      }
       // // Get the navbar
       // var navbar = document.getElementById("navbar");
       //
