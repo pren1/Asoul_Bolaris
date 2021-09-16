@@ -46,11 +46,12 @@
     </div>
     <LineChart id="myPElement" class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
                input_title="A-soul 直播数据统计" input_x_label="开播时长/1mins——时间区段：1mins  "
-               input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
+               input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color" :my_show_chart="this.my_show_chart"/>
+
 <!--    <div class="topDiv"></div>-->
     </div>
     <div id="navbar" class="sticky">
-      <a class="noselect">A-soul 直播数据统计（来源：A-soul 数据组)</a>
+      <a class="noselect" @click="show_chart">A-soul 直播数据统计（来源：A-soul 数据组)</a>
     </div>
   </div>
 </template>
@@ -68,7 +69,8 @@ export default {
     custheme: require("../roma.json"),
     global_list: [],
     home_chart_list: [],
-    list_length: 10
+    list_length: 10,
+    my_show_chart: true
   }),
   watch: {
     $route() {
@@ -97,6 +99,10 @@ export default {
     this.scroll()
   },
   methods: {
+    show_chart() {
+      console.log("Clicked!")
+      this.my_show_chart = !this.my_show_chart
+    },
     routeLoaded() {
           //Dom for the current route is loaded
           // console.log("width" + screen.width)
@@ -108,7 +114,7 @@ export default {
           document.getElementById('myPElement').style.maxWidth = '100%';
           document.getElementById('display_class').style.justifyContent = 'center';
           document.getElementById('display_class').style.alignContent = 'center';
-          document.getElementById('rating').style.marginTop = '55vh';
+          document.getElementById('rating').style.marginTop = 'calc(55vh - 50px)';
           document.getElementById('rating').style.marginRight = '0';
 
           document.querySelector('body').style.setProperty('--font-size', '1.4rem');

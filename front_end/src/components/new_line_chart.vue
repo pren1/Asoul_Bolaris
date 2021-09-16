@@ -15,7 +15,7 @@ import {
   TooltipComponent,
   ToolboxComponent,
   DataZoomComponent,
-  // LegendComponent
+  LegendComponent
 } from "echarts/components";
 import VChart from "vue-echarts";
 
@@ -27,11 +27,11 @@ use([
   TooltipComponent,
   ToolboxComponent,
   DataZoomComponent,
-  // LegendComponent
+  LegendComponent
 ]);
 
 export default {
-  props: ['input_data', 'input_theme', 'input_title', 'input_x_label', 'input_y_label', 'calculate_total', 'time_scale', 'input_color'],
+  props: ['input_data', 'input_theme', 'input_title', 'input_x_label', 'input_y_label', 'calculate_total', 'time_scale', 'input_color', 'my_show_chart'],
   name: "line_chart",
   components: {
     VChart
@@ -49,6 +49,15 @@ export default {
       // this.data_array_1d = value
       // console.log(this.line_data[0])
       this.update_chart()
+    },
+    my_show_chart(value){
+      console.log("triggered! " + value)
+      if (value === true){
+        console.log("Update charts!")
+        this.update_chart()
+      } else {
+        console.log("Hide!")
+      }
     }
   },
   // created() {
@@ -90,12 +99,15 @@ export default {
             end: 100
         },
     ],
-    // legend: {
-    //     top: '2%',
-    //     data: ['弹幕数量', '入场人次', '送礼人次', '舰团数量', '新增粉丝', '新增粉丝团', '营收', 'sc数量']
-    // },
+    legend: {
+        textStyle: {
+          fontSize: 10
+        },
+        top: '2%',
+        data: ['弹幕数量', '入场人次', '送礼人次', '舰团数量', '新增粉丝', '新增粉丝团', '营收', 'sc数量']
+    },
     toolbox: {
-        show: true,
+        show: false,
         right: '3%',
         top: '1.5%',
         feature: {

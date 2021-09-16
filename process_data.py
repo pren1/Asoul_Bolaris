@@ -50,16 +50,16 @@ class process_data(object):
             #     title = self.obtain_single_vtb_room_info_via_uid(vtb_info.uid)
             #     print(f"{name} 上播啦， 直播间标题为：{title}")
 
-            title = self.from_room_id_get_title(vtb_info.room_id)
-            # print(f"title: {title}")
-            if vtb_info.default_title != title:
-                self.title = title
-                print(f"{name} 直播间标题更新为：{title}")
+
 
             if current_room_status == 0 and previous_room_status == 1:
                 room_id = vtb_info.room_id
                 live_date = self.current_date()
 
+                title = self.from_room_id_get_title(vtb_info.room_id)
+                # print(f"title: {title}")
+                # if vtb_info.default_title != title:
+                self.title = title
                 print(f"{name} 下播啦, 正在处理{room_id}数据, 时间：{live_date}, 标题：{self.title}")
 
                 process_live_data(room_id, live_date)
