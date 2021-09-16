@@ -13,7 +13,9 @@ import {
   // TitleComponent,
   GridComponent,
   TooltipComponent,
-  ToolboxComponent
+  ToolboxComponent,
+  DataZoomComponent,
+  LegendComponent
 } from "echarts/components";
 import VChart from "vue-echarts";
 
@@ -23,7 +25,9 @@ use([
   // TitleComponent,
   GridComponent,
   TooltipComponent,
-  ToolboxComponent
+  ToolboxComponent,
+  DataZoomComponent,
+  LegendComponent
 ]);
 
 export default {
@@ -35,144 +39,146 @@ export default {
   data: () => ({
     title: '加载中...',
     option: {},
-    line_data: [],
+    line_data: {},
     data_array_1d: []
   }),
   watch: {
-    // input_data(value) {
-    //   // console.log(logs)
-    //   this.line_data = this.format_data(value)
-    //   this.data_array_1d = value
-    //   console.log(this.line_data[0])
-    //   this.update_chart()
-    // }
+    input_data(value) {
+      console.log(value)
+      this.line_data = value
+      // this.data_array_1d = value
+      // console.log(this.line_data[0])
+      this.update_chart()
+    }
   },
-  created() {
-    this.update_chart()
-  },
+  // created() {
+  //   this.update_chart()
+  // },
   methods: {
-    format_data(value){
-      var result = []
-      const start_index = -10
-      for (let i = 0; i < value.length; i++){
-        result.push([start_index + i * parseInt(this.time_scale), value[i]])
-      }
-      return result
-    },
     update_chart() {
       this.title = this.input_title
-      // if (this.calculate_total === "计算总和") {
-      //   this.title += "合计：" + Math.round(this.data_array_1d.reduce((x, y) => x + y))
-      // }
       this.option = {
         backgroundColor: 'rgba(255, 255, 255, 0.9)',
         xAxis: {
         type: 'category',
         boundaryGap: false,
-        data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+        data: this.line_data.date_list
     },
     yAxis: {
         type: 'value'
     },
-    series: [{
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
-        type: 'line',
-        areaStyle: {}
-    }]
-        //   backgroundColor: 'rgba(255, 255, 255, 1.0)',
-        //   toolbox: {
-        //       show: true,
-        //       right: '10%',
-        //       top: '4%',
-        //       feature: {
-        //           dataZoom: {
-        //               yAxisIndex: 'none',
-        //               iconStyle: {
-        //                 borderColor: '#e01f54'
-        //               },
-        //               emphasis: {
-        //                   iconStyle: {
-        //                       borderColor: '#e01f54'
-        //                   },
-        //               }
-        //           },
-        //           dataView: {
-        //             readOnly: false,
-        //             iconStyle: {
-        //                   borderColor: '#a092f1'
-        //               },
-        //               emphasis: {
-        //                   iconStyle: {
-        //                       borderColor: '#a092f1'
-        //                   },
-        //               }
-        //             },
-        //           saveAsImage: {
-        //             iconStyle: {
-        //                 borderColor: '#001852'
-        //             },
-        //             emphasis: {
-        //                 iconStyle: {
-        //                     borderColor: '#001852'
-        //                 },
-        //             }
-        //           }
-        //       }
-        //   },
-        //   xAxis: {
-        //     // type: 'category',
-        //     // // boundaryGap: false,
-        //     // // data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
-        //     // data: [0,1 ,2 ,3, 4, 5, 6]
-        //     type: 'value',
-        //     interval:10, // 步长
-        //     min: -5,
-        //     max: this.line_data[this.line_data.length-1][0],
-        //     splitLine:{
-        //       show:false
-        //     },
-        //     name: this.input_x_label,
-        //     nameLocation: 'middle',
-        //     nameGap: 30
-        //   },
-        //   yAxis: {
-        //      type: 'value',
-        //      axisLine:{
-        //       show:false
-        //      },
-        //      name: this.input_y_label,
-        //      // nameLocation: 'middle',
-        //      // nameGap: 50
-        //   },
-        //  tooltip: {
-        //     trigger: 'axis',
-        //     axisPointer: {
-        //         type: 'cross',
-        //         // label: {
-        //         //     backgroundColor: '#6a7985'
-        //         // }
-        //     },
-        //     formatter(data) {
-        //       if (data){
-        //         // console.log(data[0].data)
-        //         // var colorSpan = color => '<span style="display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:' + color + '"></span>';
-        //         return '时间：' + data[0].data[0] + '<br>' + '数值：' + data[0].data[1] + '</br>'
-        //       }
-        //       return null
-        //     }
-        //   },
-        // series: [{
-        //   data: this.line_data,
-        //   type: 'line',
-        //   smooth: true,
-        //   showSymbol: false,
-        //   itemStyle: {
-        //     color: this.input_color
-        //   },
-        //   areaStyle: {
-        //       color: this.input_color
-        //   }
-        // }]
+    dataZoom: [
+        {
+            type: 'slider',
+            show: true,
+            xAxisIndex: [0],
+            start: 70,
+            end: 100
+        },
+        {
+            type: 'slider',
+            show: true,
+            yAxisIndex: [0],
+            left: '93%',
+            start: 0,
+            end: 100
+        },
+    ],
+    legend: {
+        top: '2%',
+        data: ['弹幕数量', '入场人次', '送礼人次', '舰团数量', '新增粉丝', '新增粉丝团', '营收', 'sc数量']
+    },
+    toolbox: {
+        show: true,
+        right: '3%',
+        top: '1.5%',
+        feature: {
+            dataZoom: {
+                yAxisIndex: 'none',
+                iconStyle: {
+                  borderColor: '#e01f54'
+                },
+                emphasis: {
+                    iconStyle: {
+                        borderColor: '#e01f54'
+                    },
+                }
+            },
+            dataView: {
+              readOnly: false,
+              iconStyle: {
+                    borderColor: '#a092f1'
+                },
+                emphasis: {
+                    iconStyle: {
+                        borderColor: '#a092f1'
+                    },
+                }
+              },
+            saveAsImage: {
+              iconStyle: {
+                  borderColor: '#001852'
+              },
+              emphasis: {
+                  iconStyle: {
+                      borderColor: '#001852'
+                  },
+              }
+            }
+        }
+    },
+    tooltip: {
+        trigger: 'axis'
+    },
+    series: [
+        {
+          name: '弹幕数量',
+          data: this.line_data.danmu,
+          type: 'line',
+          smooth: true,
+        },
+        {
+          name: '入场人次',
+          data: this.line_data.entry,
+          type: 'line',
+          smooth: true,
+        },
+        {
+          smooth: true,
+          name: '送礼人次',
+          data: this.line_data.gift,
+          type: 'line'
+        },
+        {
+          smooth: true,
+          name: '舰团数量',
+          data: this.line_data.guard_data,
+          type: 'line'
+        },
+        {
+          smooth: true,
+          name: '新增粉丝',
+          data: this.line_data.new_fans_data,
+          type: 'line'
+        },
+        {
+          smooth: true,
+          name: '新增粉丝团',
+          data: this.line_data.new_medal_fans_data,
+          type: 'line'
+        },
+        {
+          smooth: true,
+          name: '营收',
+          data: this.line_data.revenue,
+          type: 'line'
+        },{
+          smooth: true,
+          name: 'sc数量',
+          data: this.line_data.sc_data,
+          type: 'line'
+        }
+        ]
       }
     }
   }
@@ -181,7 +187,7 @@ export default {
 
 <style scoped>
 .chart {
-  height: 87%;
+  height: 85%;
   width: 90%;
   max-width: 90%;
   /*padding-left: 1rem;*/

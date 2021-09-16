@@ -44,8 +44,8 @@
         </div>
       </div>
     </div>
-    <LineChart class="topDiv" :input_data="input_danmu_line_data" :input_theme="custheme"
-               input_title="弹幕数量" input_x_label="开播时长/1mins——时间区段：1mins  "
+    <LineChart class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
+               input_title="A-soul 直播数据统计" input_x_label="开播时长/1mins——时间区段：1mins  "
                input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
 <!--    <div class="topDiv"></div>-->
     </div>
@@ -65,7 +65,9 @@ export default {
     LineChart
   },
   data: () => ({
+    custheme: require("../roma.json"),
     global_list: [],
+    home_chart_list: [],
     list_length: 10
   }),
   watch: {
@@ -73,6 +75,10 @@ export default {
       // console.log(logs)
       this.global_list = value
       console.log(this.global_list[0])
+    },
+    home_chart_list(value) {
+      this.home_chart_list = value
+      console.log(this.home_chart_list)
     }
   },
   created() {
@@ -80,6 +86,8 @@ export default {
     document.title = 'A-soul 直播数据统计'
     let icon_path =  `https://asoulmonitor.xyz/api/data/avatar/asoul.webp`
     document.querySelector("[rel='icon']").setAttribute('href', icon_path);
+
+    this.home_chart_url = `https://asoulmonitor.xyz/api/active/time_seq.json`
   },
   mounted() {
     this.scroll()
@@ -140,7 +148,7 @@ export default {
 <style scoped lang="scss">
 #rating {
   max-width: 500px;
-  margin-right: 10px;
+  margin-right: 50px;
   //width: 50%;
   //margin: 0 auto;
 
@@ -289,14 +297,14 @@ export default {
     background-color: rgba(50, 50, 50, 0.5);
     position: fixed;
     z-index: 101;
-    margin-top: 50px;
-    margin-left: 10px;
+    margin-top: 100px;
+    margin-left: 50px;
     display:block;
-    width:calc(100% - 520px);
-    height:calc(100% - 50px);
+    width:calc(100% - 650px);
+    height:calc(100% - 150px);
     top:0;
     left:0;
     border-radius: 10px;
-    max-width: calc(100% - 500px);
+    max-width: calc(100% - 600px);
 }
 </style>

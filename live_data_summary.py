@@ -19,6 +19,8 @@ import pdb
 import json
 import warnings
 import datetime
+from pathlib import Path
+import numpy as np
 warnings.filterwarnings("ignore")
 
 class live_summary(object):
@@ -152,7 +154,8 @@ class live_summary(object):
             print("No live!")
             return False
         # 2.生成词频图 词云图
-        self.__wordfreq_wordcloud(live_data_group_by_type)
+        # self.__wordfreq_wordcloud(live_data_group_by_type)
+
         # try:
         #
         # except:
@@ -436,6 +439,39 @@ class live_summary(object):
 
         with open(f"{self.target_path}/{self.dm_sql_road}_stats_picture.json", "w", encoding='utf8') as outfile:
             json.dump(res_dict, outfile, ensure_ascii=False)
+
+        target_path = "/home/admin/public/active/"
+        # Load live list
+        live_json_readin = target_path + 'time_seq.json'
+        if Path(live_json_readin).exists():
+            with open(live_json_readin) as json_file:
+                live_list = json.load(json_file)
+        else:
+            live_list = {
+                'gift': [],
+                'danmu': [],
+                'sc_data': [],
+                'guard_data': [],
+                'entry': [],
+                'revenue': [],
+                'new_fans_data': [],
+                'new_medal_fans_data': [],
+                'date_list': []
+            }
+
+        # Push new live info
+        live_list['gift'].insert(0, int(np.sum(res_dict['gift'])))
+        live_list['danmu'].insert(0, int(np.sum(res_dict['danmu'])))
+        live_list['sc_data'].insert(0, int(np.sum(res_dict['sc_data'])))
+        live_list['guard_data'].insert(0, int(np.sum(res_dict['guard_data'])))
+        live_list['entry'].insert(0, int(np.sum(res_dict['entry'])))
+        live_list['revenue'].insert(0, int(np.sum(res_dict['revenue'])))
+        live_list['new_fans_data'].insert(0, int(np.sum(res_dict['new_fans_data'])))
+        live_list['new_medal_fans_data'].insert(0, int(np.sum(res_dict['new_medal_fans_data'])))
+        live_list['date_list'].insert(0, self.live_date)
+        # save the updated results
+        with open(live_json_readin, "w", encoding='utf8') as outfile:
+            json.dump(live_list, outfile, ensure_ascii=False)
 
     # 生成营收饼图，收入分布，营收数据存入每日统计数据库
     def __make_revenue_picture(self, my_user_stats):
