@@ -40,7 +40,7 @@ export default {
   }),
   watch: {
     input_data(value) {
-      console.log(this.sort_dict(value))
+      // console.log(this.sort_dict(value))
       let sorted_value = this.sort_dict(value)
       // for (const [key, dict_val] of Object.entries(this.sort_dict(value))) {
       //   this.x_data.push(key)

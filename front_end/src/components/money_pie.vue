@@ -47,7 +47,7 @@ export default {
     input_data(value) {
       // console.log(logs)
       this.money_pie = value
-      console.log(this.money_pie[0][0])
+      // console.log(this.money_pie[0][0])
       // console.log(this.type_pie)
       this.update_chart()
     }

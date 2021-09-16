@@ -77,11 +77,11 @@ export default {
     my_global_list(value) {
       // console.log(logs)
       this.global_list = value
-      console.log(this.global_list[0])
+      // console.log(this.global_list[0])
     },
     home_chart_list(value) {
       this.home_chart_list = value
-      console.log(this.home_chart_list)
+      // console.log(this.home_chart_list)
     }
   },
   created() {
@@ -99,7 +99,7 @@ export default {
   methods: {
     routeLoaded() {
           //Dom for the current route is loaded
-          console.log("width" + screen.width)
+          // console.log("width" + screen.width)
         if (screen.width < 1200){
           document.getElementById('myPElement').style.width = '100%';
           document.getElementById('myPElement').style.height = '55%';

@@ -44,7 +44,7 @@ export default {
   }),
   watch: {
     input_data(value) {
-      console.log(value)
+      // console.log(value)
       this.line_data = value
       // this.data_array_1d = value
       // console.log(this.line_data[0])

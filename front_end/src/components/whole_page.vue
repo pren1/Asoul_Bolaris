@@ -88,7 +88,7 @@ export default {
     target_color: ""
   }),
   created() {
-    console.log("live info" + this.$route.params.live_info)
+    // console.log("live info" + this.$route.params.live_info)
     let info = this.$route.params.live_info.split("&")
     let target_link = info[0] + '_' + info[1]
 

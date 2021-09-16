@@ -43,7 +43,7 @@ export default {
       // console.log(logs)
       this.line_data = this.format_data(value)
       this.data_array_1d = value
-      console.log(this.line_data[0])
+      // console.log(this.line_data[0])
       this.update_chart()
     }
   },
