@@ -15,7 +15,7 @@ import {
   TooltipComponent,
   ToolboxComponent,
   DataZoomComponent,
-  LegendComponent
+  // LegendComponent
 } from "echarts/components";
 import VChart from "vue-echarts";
 
@@ -27,7 +27,7 @@ use([
   TooltipComponent,
   ToolboxComponent,
   DataZoomComponent,
-  LegendComponent
+  // LegendComponent
 ]);
 
 export default {
@@ -67,11 +67,17 @@ export default {
     yAxis: {
         type: 'value'
     },
+    grid: {
+      left: '3%',
+      bottom: '14%',
+      containLabel: true
+    },
     dataZoom: [
         {
             type: 'slider',
             show: true,
             xAxisIndex: [0],
+            bottom: '6%',
             start: 70,
             end: 100
         },
@@ -84,10 +90,10 @@ export default {
             end: 100
         },
     ],
-    legend: {
-        top: '2%',
-        data: ['弹幕数量', '入场人次', '送礼人次', '舰团数量', '新增粉丝', '新增粉丝团', '营收', 'sc数量']
-    },
+    // legend: {
+    //     top: '2%',
+    //     data: ['弹幕数量', '入场人次', '送礼人次', '舰团数量', '新增粉丝', '新增粉丝团', '营收', 'sc数量']
+    // },
     toolbox: {
         show: true,
         right: '3%',

@@ -154,7 +154,7 @@ class live_summary(object):
             print("No live!")
             return False
         # 2.生成词频图 词云图
-        # self.__wordfreq_wordcloud(live_data_group_by_type)
+        self.__wordfreq_wordcloud(live_data_group_by_type)
 
         # try:
         #

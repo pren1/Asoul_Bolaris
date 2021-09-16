@@ -1,6 +1,6 @@
 <template>
   <div class="background_img">
-    <div class="display_class">
+    <div class="display_class" id="display_class">
       <div id="rating" class="content">
       <div class="item" v-for="info_str in global_list.slice(0, list_length)" :key="info_str">
         <router-link class="avatar" :to="'/' + info_str">
@@ -44,7 +44,7 @@
         </div>
       </div>
     </div>
-    <LineChart class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
+    <LineChart id="myPElement" class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
                input_title="A-soul 直播数据统计" input_x_label="开播时长/1mins——时间区段：1mins  "
                input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
 <!--    <div class="topDiv"></div>-->
@@ -108,6 +108,27 @@ export default {
         }
         // myFunction()
       }
+      window.addEventListener('load', () => {
+        // run after everything is in-place
+        console.log("width" + screen.width)
+        if (screen.width < 1200){
+          document.getElementById('myPElement').style.width = '100%';
+          document.getElementById('myPElement').style.height = '55%';
+          document.getElementById('myPElement').style.marginTop = '50px';
+          document.getElementById('myPElement').style.marginLeft = '0px';
+          document.getElementById('myPElement').style.maxWidth = '100%';
+          document.getElementById('display_class').style.justifyContent = 'center';
+          document.getElementById('display_class').style.alignContent = 'center';
+          document.getElementById('rating').style.marginTop = '55vh';
+          document.getElementById('rating').style.marginRight = '0';
+
+          document.querySelector('body').style.setProperty('--font-size', '1.4rem');
+        } else {
+          document.querySelector('body').style.setProperty('--font-size', '1.8rem');
+        }
+
+
+      })
       // // Get the navbar
       // var navbar = document.getElementById("navbar");
       //
@@ -146,11 +167,15 @@ export default {
 </script>
 
 <style scoped lang="scss">
+$fontSize: var(--font-size);
+
 #rating {
   max-width: 500px;
   margin-right: 50px;
+  //margin-top: 300px;
   //width: 50%;
   //margin: 0 auto;
+  //margin-top: 55%;
 
   .item {
     position: relative;
@@ -159,7 +184,7 @@ export default {
     transition: 0.3s ease;
     box-shadow: 1px 1px 4px #0000;
     background-color: white;
-    //margin-top: 1.5rem;
+    //margin-top: 55%;
 
     &:hover {
       box-shadow: 1px 1px 4px #0000005F;
@@ -203,12 +228,12 @@ export default {
 
     .title {
       font-weight: bold;
-      font-size: 1.8rem;
+      font-size: $fontSize;
       //padding-left: 0.5rem;
     }
 
     .desc {
-      font-size: 1.8rem;
+      font-size: $fontSize;
       font-weight: bold;
       padding-left: 1rem;
     }
@@ -239,7 +264,7 @@ export default {
 
 .display_class{
   display: flex;
-   justify-content: flex-end;
+  justify-content: flex-end;
    //align-items: center;
    //align-content: flex-start;
   //justify-content: space-around;
@@ -292,8 +317,8 @@ export default {
 .topDiv {
     //background-image: url("https://asoulmonitor.xyz/api/data/background.webp");
     //background-repeat: no-repeat;
-    background-position: center center; /* Center the image */
-    background-size: cover;
+    //background-position: center center; /* Center the image */
+    //background-size: cover;
     background-color: rgba(50, 50, 50, 0.5);
     position: fixed;
     z-index: 101;
