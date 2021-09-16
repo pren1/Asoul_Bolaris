@@ -1,59 +1,69 @@
 <template>
-  <div  class="background_img">
-    <div id="navbar" class="sticky">
-      <a>A-soul 直播数据统计（来源：A-soul 数据组)</a>
-    </div>
-    <div id="rating" class="content">
+  <div class="background_img">
+    <div class="display_class">
+      <div id="rating" class="content">
       <div class="item" v-for="info_str in global_list.slice(0, list_length)" :key="info_str">
         <router-link class="avatar" :to="'/' + info_str">
           <img width="128" height="128" :src="provide_correct_url(info_str)" alt="头像"/>
         </router-link>
         <div class="detail">
             <div v-if="info_str.split('&')[1] === '22625025'">
-              <p class="title" style="color: #9AC8E2">
+              <p class="title noselect" style="color: #9AC8E2">
                 {{provide_live_name(info_str)}}
               </p>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22632424'">
-              <p class="title" style="color: #DB7D74">
+              <p class="title noselect" style="color: #DB7D74">
                 {{provide_live_name(info_str)}}
               </p>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22634198'">
-              <p class="title" style="color: #B8A6D9">
+              <p class="title noselect" style="color: #B8A6D9">
                 {{provide_live_name(info_str)}}
               </p>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22637261'">
-              <p class="title" style="color: #E799B0">
+              <p class="title noselect" style="color: #E799B0">
                 {{provide_live_name(info_str)}}
               </p>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22625027'">
-              <p class="title" style="color: #576690">
+              <p class="title noselect" style="color: #576690">
                 {{provide_live_name(info_str)}}
               </p>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22632157'">
-                <p class="title" style="color: #000000">
+                <p class="title noselect" style="color: #000000">
                   {{provide_live_name(info_str)}}
                 </p>
             </div>
   <!--          <p class="value">同传总字数：</p>-->
-            <p class="desc">
+            <p class="desc noselect">
               {{provide_live_date(info_str)}}
             </p>
         </div>
       </div>
     </div>
+    <LineChart class="topDiv" :input_data="input_danmu_line_data" :input_theme="custheme"
+               input_title="弹幕数量" input_x_label="开播时长/1mins——时间区段：1mins  "
+               input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color"/>
+<!--    <div class="topDiv"></div>-->
+    </div>
+    <div id="navbar" class="sticky">
+      <a class="noselect">A-soul 直播数据统计（来源：A-soul 数据组)</a>
+    </div>
   </div>
 </template>
 
 <script>
+import LineChart from './new_line_chart.vue'
 import mixin from '../global_list_mixin.js'
 export default {
   name: "homepage",
   mixins: [mixin],
+  components: {
+    LineChart
+  },
   data: () => ({
     global_list: [],
     list_length: 10
@@ -130,8 +140,9 @@ export default {
 <style scoped lang="scss">
 #rating {
   max-width: 500px;
+  margin-right: 10px;
   //width: 50%;
-  margin: 0 auto;
+  //margin: 0 auto;
 
   .item {
     position: relative;
@@ -216,9 +227,15 @@ export default {
    background-position: center center; /* Center the image */
    background-size: cover;
    background-attachment: fixed;
-   display: flex;
-   justify-content: center;
-   align-items: center;
+}
+
+.display_class{
+  display: flex;
+   justify-content: flex-end;
+   //align-items: center;
+   //align-content: flex-start;
+  //justify-content: space-around;
+  flex-flow: row wrap;
 }
 
 /* Style the navbar */
@@ -254,4 +271,32 @@ export default {
   //min-width: 750px;
 }
 
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Edge, Opera and Firefox */
+}
+
+.topDiv {
+    //background-image: url("https://asoulmonitor.xyz/api/data/background.webp");
+    //background-repeat: no-repeat;
+    background-position: center center; /* Center the image */
+    background-size: cover;
+    background-color: rgba(50, 50, 50, 0.5);
+    position: fixed;
+    z-index: 101;
+    margin-top: 50px;
+    margin-left: 10px;
+    display:block;
+    width:calc(100% - 520px);
+    height:calc(100% - 50px);
+    top:0;
+    left:0;
+    border-radius: 10px;
+    max-width: calc(100% - 500px);
+}
 </style>
