@@ -1,5 +1,9 @@
 <template>
   <div class="container background_img" id="myPElement">
+     <meta
+     name='viewport'
+     content='maximum-scale=1.0'
+    />
     <BarChart :input_data="input_wordCloud_bar_data" :input_theme="custheme"
                input_title="词频统计" input_x_label="词语" input_y_label="词语数目" :input_color="this.target_color"
                 />
@@ -208,8 +212,8 @@ $background_color: var(--main-color);
    background-color: $background_color;
    //background-attachment: scroll;
    position: relative;
-   height: 1000%;
-   width: 270%;
+   height: 100%;
+   width: 100%;
    //max-height: 300%;
    //max-width: 1792px;
    background-position: center 30%;

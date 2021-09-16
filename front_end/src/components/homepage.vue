@@ -1,5 +1,10 @@
 <template>
   <div class="background_img">
+<!--    <meta-->
+<!--     name='viewport'-->
+<!--     content='maximum-scale=10.0, user-scalable=1'-->
+<!--    />-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <div class="display_class" id="display_class">
       <div id="rating" class="content">
       <div class="item" v-for="info_str in global_list.slice(0, list_length)" :key="info_str">
@@ -44,14 +49,16 @@
         </div>
       </div>
     </div>
-    <LineChart id="myPElement" class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
-               input_title="A-soul 直播数据统计" input_x_label="开播时长/1mins——时间区段：1mins  "
+    <div v-if="my_show_chart">
+      <LineChart id="myPElement" class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
+               input_title="来源：A-soul数据组" input_x_label="开播时长/1mins——时间区段：1mins  "
                input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color" :my_show_chart="this.my_show_chart"/>
+    </div>
 
 <!--    <div class="topDiv"></div>-->
     </div>
     <div id="navbar" class="sticky">
-      <a class="noselect" @click="show_chart">A-soul 直播数据统计（来源：A-soul 数据组)</a>
+      <a id="navbar_title" class="noselect" @click="show_chart">A-soul 直播数据统计（单击隐藏图表)</a>
     </div>
   </div>
 </template>
@@ -93,6 +100,18 @@ export default {
     document.querySelector("[rel='icon']").setAttribute('href', icon_path);
 
     this.home_chart_url = `https://asoulmonitor.xyz/api/active/time_seq.json`
+    console.log(
+        "                         #%%%%,                                                 \n" +
+        "                      .@@@@@@@,                                                 \n" +
+        "                    %@@@@@@@@@, (@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@       \n" +
+        "                 .@@@@@%  @@@@,(@@@@.                                @@@@       \n" +
+        "               @@@@@@.    @@@@,*@@@@/            .       ...    .... @@@@       \n" +
+        "            ,@@@@@#       @@@@,  @@@@@@@@&   @@@@@@@.@. #@@@%   @@@@ @@@@       \n" +
+        "          &@@@@@          @@@@,       &@@@@ @@@@/  @.@%,#@@@%   @@@@ @@@@       \n" +
+        "       ,@@@@@# ,,,,,,,,,,,@@@@/,,,,,,/@@@@@ @@@@@/&@@@@ *@@@@%/@@@@& @@@@       \n" +
+        "     @@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@/   ,@@@@@@@%    @@@@@@@@.  @@@@       \n" +
+        "                                                                                \n")
+    console.log("前端：A-soul数据组/一代鬃狮" + "\n" + "后端：A-soul数据组" + "\n" + "图像：桃桃子_想成为一只猫, 匆匆丶coco")
   },
   mounted() {
     this.$router.onReady(() => this.routeLoaded());
@@ -100,8 +119,13 @@ export default {
   },
   methods: {
     show_chart() {
-      console.log("Clicked!")
-      this.my_show_chart = !this.my_show_chart
+      // console.log("Clicked!")
+      if (this.my_show_chart === false){
+        window.location.reload()
+      } else {
+        this.my_show_chart = !this.my_show_chart
+        document.getElementById('navbar_title').innerText = 'A-soul 直播数据统计（单击重新加载)'
+      }
     },
     routeLoaded() {
           //Dom for the current route is loaded
@@ -114,12 +138,12 @@ export default {
           document.getElementById('myPElement').style.maxWidth = '100%';
           document.getElementById('display_class').style.justifyContent = 'center';
           document.getElementById('display_class').style.alignContent = 'center';
-          document.getElementById('rating').style.marginTop = 'calc(55vh - 50px)';
+          // document.getElementById('rating').style.marginTop = '50px';
           document.getElementById('rating').style.marginRight = '0';
 
-          document.querySelector('body').style.setProperty('--font-size', '1.4rem');
+          document.querySelector('body').style.setProperty('--font-size', '1.2rem');
         } else {
-          document.querySelector('body').style.setProperty('--font-size', '1.8rem');
+          document.querySelector('body').style.setProperty('--font-size', '1.7rem');
         }
         },
     scroll() {
@@ -268,6 +292,8 @@ $fontSize: var(--font-size);
    background-position: center center; /* Center the image */
    background-size: cover;
    background-attachment: fixed;
+   height: 100%;
+   width: 100%;
 }
 
 .display_class{
