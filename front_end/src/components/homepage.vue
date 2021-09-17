@@ -13,9 +13,11 @@
         </router-link>
         <div class="detail">
             <div v-if="info_str.split('&')[1] === '22625025'">
-              <p class="title noselect" style="color: #9AC8E2">
-                {{provide_live_name(info_str)}}
-              </p>
+              <router-link :to="'/' + info_str" style="text-decoration: none; color: inherit;">
+                <p class="title noselect" style="color: #9AC8E2">
+                  {{provide_live_name(info_str)}}
+                </p>
+              </router-link>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22632424'">
               <p class="title noselect" style="color: #DB7D74">
@@ -51,14 +53,14 @@
     </div>
     <div v-if="my_show_chart">
       <LineChart id="myPElement" class="topDiv" :input_data="home_chart_list" :input_theme="custheme"
-               input_title="来源：A-soul数据组" input_x_label="开播时长/1mins——时间区段：1mins  "
+               input_title="数据来源：A-SOUL数据组" input_x_label="开播时长/1mins——时间区段：1mins  "
                input_y_label="弹幕数量" calculate_total="计算总和" time_scale="1" :input_color="this.target_color" :my_show_chart="this.my_show_chart"/>
     </div>
 
 <!--    <div class="topDiv"></div>-->
     </div>
     <div id="navbar" class="sticky">
-      <a id="navbar_title" class="noselect" @click="show_chart">A-soul 直播数据统计（单击隐藏图表)</a>
+      <a id="navbar_title" class="noselect" @click="show_chart">A-SOUL 直播数据统计前端 (单击显示参与人员)</a>
     </div>
   </div>
 </template>
@@ -77,7 +79,9 @@ export default {
     global_list: [],
     home_chart_list: [],
     list_length: 10,
-    my_show_chart: true
+    my_show_chart: true,
+    large_screen: true,
+    show_info: true
   }),
   watch: {
     $route() {
@@ -111,7 +115,7 @@ export default {
         "       ,@@@@@# ,,,,,,,,,,,@@@@/,,,,,,/@@@@@ @@@@@/&@@@@ *@@@@%/@@@@& @@@@       \n" +
         "     @@@@@@     @@@@@@@@@@@@@@@@@@@@@@@@@/   ,@@@@@@@%    @@@@@@@@.  @@@@       \n" +
         "                                                                                \n")
-    console.log("前端：A-soul数据组/一代鬃狮" + "\n" + "后端：A-soul数据组" + "\n" + "图像：桃桃子_想成为一只猫, 匆匆丶coco")
+    console.log("如有问题或希望贡献代码，请联系b站A-SOUL数据组或一代鬃狮")
   },
   mounted() {
     this.$router.onReady(() => this.routeLoaded());
@@ -119,12 +123,21 @@ export default {
   },
   methods: {
     show_chart() {
+      if (this.large_screen === true){
+        if (this.show_info === true){
+          document.getElementById('navbar_title').innerText = '前端：一代鬃狮，后端：ydyjya, lhy, catus, A-SOUL数据组以及组内其他人，绘图：桃桃子_想成为一只猫，约稿：匆匆丶coco，背景：愤怒的小鸟'
+        } else {
+          document.getElementById('navbar_title').innerText = 'A-SOUL 直播数据统计前端 (单击显示参与人员)'
+        }
+        this.show_info = !this.show_info
+        return
+      }
       // console.log("Clicked!")
       if (this.my_show_chart === false){
         window.location.reload()
       } else {
         this.my_show_chart = !this.my_show_chart
-        document.getElementById('navbar_title').innerText = 'A-soul 直播数据统计（单击重新加载)'
+        document.getElementById('navbar_title').innerText = 'A-SOUL 直播数据（单击重新加载)'
       }
     },
     routeLoaded() {
@@ -142,8 +155,11 @@ export default {
           document.getElementById('rating').style.marginRight = '0';
 
           document.querySelector('body').style.setProperty('--font-size', '1.2rem');
+          document.getElementById('navbar_title').innerText = 'A-SOUL 直播数据（单击隐藏图表)';
+          this.large_screen = false;
         } else {
-          document.querySelector('body').style.setProperty('--font-size', '1.7rem');
+          document.querySelector('body').style.setProperty('--font-size', '1.6rem');
+          this.large_screen = true;
         }
         },
     scroll() {
@@ -366,4 +382,5 @@ $fontSize: var(--font-size);
     border-radius: 10px;
     max-width: calc(100% - 600px);
 }
+
 </style>

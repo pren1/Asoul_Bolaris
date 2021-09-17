@@ -92,6 +92,8 @@ export default {
     target_color: ""
   }),
   created() {
+    document.body.scrollTop = 0; // For Safari
+    document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
     // console.log("live info" + this.$route.params.live_info)
     let info = this.$route.params.live_info.split("&")
     let target_link = info[0] + '_' + info[1]
