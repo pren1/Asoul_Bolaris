@@ -142,10 +142,10 @@ export default {
   },
   mounted() {
     this.$router.onReady(() => this.routeLoaded());
-    console.log("mounted called")
+    // console.log("mounted called")
     window.addEventListener('load', () => {
         // run after everything is in-place
-        console.log("width" + screen.width)
+        // console.log("width" + screen.width)
         if (screen.width > 700){
           document.getElementById('myPElement').style.maxWidth = screen.width + 'px';
         }
@@ -157,12 +157,12 @@ export default {
             this.$nextTick(this.routeLoaded);
     },
     my_pie_data(value) {
-      console.log('my_pie_data available!')
+      // console.log('my_pie_data available!')
       this.input_money_pie_data = value.money_pie
       this.input_type_pie_data = value.type_pie
     },
     my_stat_data(value) {
-      console.log('my_stat_data available!' + value)
+      // console.log('my_stat_data available!' + value)
       this.input_danmu_line_data = value.danmu
       this.input_entry_line_data = value.entry
       this.input_gift_line_data = value.gift
@@ -181,8 +181,8 @@ export default {
   methods: {
     routeLoaded() {
           //Dom for the current route is loaded
-          console.log("Router loaded!")
-          console.log("width: " + screen.width)
+          // console.log("Router loaded!")
+          // console.log("width: " + screen.width)
           if (screen.width > 700){
               document.getElementById('myPElement').style.maxWidth = screen.width + 'px';
             }

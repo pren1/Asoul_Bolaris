@@ -12,12 +12,11 @@
           <img width="128" height="128" :src="provide_correct_url(info_str)" alt="头像"/>
         </router-link>
         <div class="detail">
+          <router-link :to="'/' + info_str" style="text-decoration: none; color: inherit;">
             <div v-if="info_str.split('&')[1] === '22625025'">
-              <router-link :to="'/' + info_str" style="text-decoration: none; color: inherit;">
                 <p class="title noselect" style="color: #9AC8E2">
                   {{provide_live_name(info_str)}}
                 </p>
-              </router-link>
             </div>
             <div v-else-if="info_str.split('&')[1] === '22632424'">
               <p class="title noselect" style="color: #DB7D74">
@@ -44,6 +43,7 @@
                   {{provide_live_name(info_str)}}
                 </p>
             </div>
+            </router-link>
   <!--          <p class="value">同传总字数：</p>-->
             <p class="desc noselect">
               {{provide_live_date(info_str)}}

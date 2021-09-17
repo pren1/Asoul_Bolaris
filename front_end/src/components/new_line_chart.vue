@@ -51,9 +51,9 @@ export default {
       this.update_chart()
     },
     my_show_chart(value){
-      console.log("triggered! " + value)
+      // console.log("triggered! " + value)
       if (value === true){
-        console.log("Update charts!")
+        // console.log("Update charts!")
         this.update_chart()
       } else {
         console.log("Hide!")
