@@ -324,7 +324,7 @@ $fontSize: var(--font-size);
 /* Style the navbar */
 #navbar {
   overflow: hidden;
-  background-color: #333;
+  background-color: #FF8772;
   z-index: 100;
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
@@ -369,7 +369,7 @@ $fontSize: var(--font-size);
     //background-repeat: no-repeat;
     //background-position: center center; /* Center the image */
     //background-size: cover;
-    background-color: rgba(50, 50, 50, 0.5);
+    background-color: rgb(255, 135, 114, 0.5);
     position: fixed;
     z-index: 101;
     margin-top: 100px;

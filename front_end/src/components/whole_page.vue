@@ -113,7 +113,7 @@ export default {
     "22634198": "#B8A6D9",
     "22637261": "#E799B0",
     "22625027": "#576690",
-    "22632157":  "#000000"
+    "22632157":  "#FF8772"
     }
     // document.querySelector('body').style.setProperty('example', test);
     this.target_color = color_selector[user_id];
