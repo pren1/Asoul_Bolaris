@@ -33,8 +33,29 @@ if __name__ == '__main__':
     # test('22625025', '2021_9_15')
 
     target_path = "/home/admin/public/data/"
+    process_live_data('22637261', '2021_10_21', target_path)
+    process_live_data('22632424', '2021_10_21', target_path)
+    process_live_data('22625027', '2021_10_20', target_path)
+    process_live_data('22625025', '2021_10_20', target_path)
+    process_live_data('22634198', '2021_10_20', target_path)
+    process_live_data('22632157', '2021_10_18', target_path)
+    process_live_data('22637261', '2021_10_17', target_path)
+    process_live_data('22625025', '2021_10_16', target_path)
+    process_live_data('22637261', '2021_10_14', target_path)
+
+    process_live_data('22625027', '2021_10_13', target_path)
+    process_live_data('22625025', '2021_10_13', target_path)
+    process_live_data('22634198', '2021_10_13', target_path)
+
+    process_live_data('22632424', '2021_10_7', target_path)
+    process_live_data('22634198', '2021_10_6', target_path)
+
+    process_live_data('22625027', '2021_10_5', target_path)
+    process_live_data('22637261', '2021_10_4', target_path)
+    # process_live_data('22625025', '2021_9_29', target_path)
+    # process_live_data('22632424', '2021_9_30', target_path)
     # target_path = '/Users/renpeng/Downloads/Bolaris/'
-    process_live_data('22625027', '2021_9_17', target_path)
+    # process_live_data('22625027', '2021_9_17', target_path)
     # process_live_data('22637261', '2021_8_5', target_path)
     # process_live_data('22637261', '2021_8_12', target_path)
     # process_live_data('22637261', '2021_8_19', target_path)

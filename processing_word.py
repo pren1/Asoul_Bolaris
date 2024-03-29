@@ -140,7 +140,6 @@ def delete_stop_vote_word(my_word_freq_dict, my_vote_word_dict, my_stop_word_dic
         my_word_freq_dict.pop(word)
     return my_word_freq_dict
 
-
 def get_word_freq_dic(my_live_data_group_by_type):
     """
 
